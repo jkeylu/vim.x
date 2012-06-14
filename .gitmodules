@@ -1,9 +1,6 @@
 [submodule "vim-pathogen"]
 	path = vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
-[submodule "bundle/oceandeep"]
-	path = bundle/oceandeep
-	url = git://github.com/vim-scripts/oceandeep.git
 [submodule "bundle/bufexplorer.zip"]
 	path = bundle/bufexplorer.zip
 	url = git://github.com/vim-scripts/bufexplorer.zip.git
@@ -34,3 +31,15 @@
 [submodule "bundle/neocomplcache"]
 	path = bundle/neocomplcache
 	url = git://github.com/Shougo/neocomplcache.git
+[submodule "bundle/vim-node"]
+	path = bundle/vim-node
+	url = git://github.com/guileen/vim-node.git
+[submodule "bundle/vim-stylus"]
+	path = bundle/vim-stylus
+	url = git://github.com/wavded/vim-stylus.git
+[submodule "bundle/vim-javascript-syntax"]
+	path = bundle/vim-javascript-syntax
+	url = git://github.com/jelera/vim-javascript-syntax.git
+[submodule "bundle/xoria256.vim"]
+	path = bundle/xoria256.vim
+	url = git://github.com/vim-scripts/xoria256.vim.git

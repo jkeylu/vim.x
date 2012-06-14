@@ -23,7 +23,15 @@ call pathogen#infect()
 "
 
 source $VIMRUNTIME/mswin.vim
-colorscheme oceandeep
+
+if has("gui_running") || &t_Co == 256
+	colorscheme xoria256
+endif
+
+if &t_Co > 2 || has("gui_running")
+	syntax on
+	set hlsearch
+endif
 
 let mapleader=","
 
@@ -51,11 +59,6 @@ set noexpandtab
 
 if has("mouse")
 	set mouse=a
-endif
-
-if &t_Co > 2 || has("gui_running")
-	syntax on
-	set hlsearch
 endif
 
 if has("autocmd")
@@ -149,3 +152,12 @@ let g:neocomplcache_enable_camel_case_completion=1
 let g:neocomplcache_enable_underbar_completion=1
 let g:neocomplcache_min_syntax_length=3
 
+" vim-javascript-syntax
+if has("autocmd")
+	autocmd FileType javascript call JavaScriptFold()
+endif
+
+" dictionary
+if has("autocmd")
+	autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
+endif
