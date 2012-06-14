@@ -22,17 +22,32 @@ call pathogen#infect()
 " Vim Settings
 "
 
+source $VIMRUNTIME/mswin.vim
 colorscheme oceandeep
+
+let mapleader=","
+
 set fileencodings=utf-8,gbk,gb2312,cp936
 set fileformats=unix,dos
+
+set number
 set nocompatible
-let mapleader=","
+
 set backspace=indent,eol,start
 set nobackup
 set history=50
 set showcmd
+
 set incsearch
 set ignorecase smartcase
+
+set smartindent
+set cindent
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
 
 if has("mouse")
 	set mouse=a
@@ -45,33 +60,24 @@ endif
 
 if has("autocmd")
 	filetype plugin indent on
+
+	" remember the position of the last time view
 	augroup vimrcEx
-	au!
-	autocmd FileType text setlocal textwidth=78
-	autocmd BufReadPost *
-		\ if line("'\"") > 1 && line("'\"") <= line("$") |
-		\ exe "normal! g`\"" |
-		\ endif
+		autocmd!
+		autocmd FileType text setlocal textwidth=78
+		autocmd BufReadPost *
+			\ if line("'\"") > 1 && line("'\"") <= line("$") |
+			\ exe "normal! g`\"" |
+			\ endif
 	augroup END
 else
 	set autoindent
 endif
 
-source $VIMRUNTIME/mswin.vim
-set number
-set smartindent
-set cindent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set noexpandtab
-
-if(MySys() == "windows")
-	set lines=25
-	set columns=90
-endif
-
 if has("gui_running")
+	set lines=30
+	set columns=100
+
 	set cursorline
 	hi cursorline guibg=#112233
 
@@ -88,6 +94,7 @@ endif
 
 set laststatus=2
 set statusline=\ %f%m%r%h%w\ \[%{&fileformat}\\%{&fileencoding}\]\ %=\ Line:%l/%L:%c
+
 set foldmethod=marker
 nnoremap <space> @=((foldclosed(line('.'))<0) ? 'zc' : 'zo')<cr>
 
