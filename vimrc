@@ -152,12 +152,8 @@ let g:neocomplcache_enable_camel_case_completion=1
 let g:neocomplcache_enable_underbar_completion=1
 let g:neocomplcache_min_syntax_length=3
 
-" vim-javascript-syntax
-if has("autocmd")
-	autocmd FileType javascript call JavaScriptFold()
-endif
-
 " dictionary
 if has("autocmd")
 	autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
 endif
+
