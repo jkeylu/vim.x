@@ -55,3 +55,6 @@
 [submodule "bundle/vim-addon-mw-utils"]
 	path = bundle/vim-addon-mw-utils
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "bundle/jsbeautify.vim"]
+	path = bundle/jsbeautify.vim
+	url = git://github.com/jkeylu/jsbeautify.vim.git
