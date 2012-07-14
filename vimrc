@@ -1,3 +1,39 @@
+set nocompatible	" be iMproved
+filetype off		" required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+" My Bundles
+" 
+" original epos on github
+Bundle 'garbas/vim-snipmate'
+Bundle 'guileen/vim-node'
+Bundle 'honza/snipmate-snippets'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'jkeylu/jsbeautify.vim'
+Bundle 'jkeylu/mark2666'
+Bundle 'jkeylu/vimdoc_cn'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'myusuf3/numbers.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'Shougo/neocomplcache'
+Bundle 'tomtom/tlib_vim'
+Bundle 'tpope/vim-markdown'
+Bundle 'vim-scripts/a.vim'
+Bundle 'vim-scripts/bufexplorer.zip'
+Bundle 'vim-scripts/FencView.vim'
+Bundle 'vim-scripts/LargeFile'
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'vim-scripts/xoria256.vim'
+Bundle 'wavded/vim-stylus'
+
+
 "
 " function check system
 "
@@ -9,13 +45,6 @@ function! MySys()
 		return "linux"
 	endif
 endfunction
-
-
-"
-" load bundle
-"
-
-call pathogen#infect()
 
 
 "
@@ -39,7 +68,6 @@ set fileencodings=utf-8,gbk,gb2312,cp936
 set fileformats=unix,dos
 
 set number
-set nocompatible
 
 set backspace=indent,eol,start
 set nobackup

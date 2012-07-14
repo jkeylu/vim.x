@@ -1,15 +1,18 @@
 vim.x
 =====
 
-My vim config
+### Install
 
-* get submodule:
+1. Setup [vim.x]
 
 ```
+$ git clone https://github.com/jkeylu/vim.x.git ~/.vim
+$ cd ~/.vim
 $ git submodule init
 $ git submodule update
 ```
 
-* mkdir ./autoload/
-* copy ./vim-pathogen/autoload/pathogen.vim to ./autoload/
-
+2. Install configured bundles
+	Launch `vim`, run `:BundleInstall` 
+	(or `vim +BundleInstall +qall` for CLI lovers)
+	
