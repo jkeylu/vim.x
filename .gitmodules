@@ -61,3 +61,6 @@
 [submodule "bundle/numbers.vim"]
 	path = bundle/numbers.vim
 	url = git://github.com/myusuf3/numbers.vim.git
+[submodule "bundle/a.vim"]
+	path = bundle/a.vim
+	url = git://github.com/vim-scripts/a.vim.git
