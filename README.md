@@ -3,7 +3,7 @@ vim.x
 
 ### Install
 
-1. Setup [vim.x]
+1. Setup [Vim.x]
 
 ```
 $ git clone https://github.com/jkeylu/vim.x.git ~/.vim

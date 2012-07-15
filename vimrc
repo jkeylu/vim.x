@@ -1,8 +1,20 @@
+"
+" check system
+"
+if (has("win32") || has("win95") || has("win64") || has("win16"))
+	let g:vimrc_iswindows=1
+else
+	let g:vimrc_iswindows=0
+endif
+
+
 set nocompatible	" be iMproved
 filetype off		" required!
 
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
 
 " let Vundle manage Vundle
 " required!
@@ -32,20 +44,6 @@ Bundle 'vim-scripts/LargeFile'
 Bundle 'vim-scripts/taglist.vim'
 Bundle 'vim-scripts/xoria256.vim'
 Bundle 'wavded/vim-stylus'
-
-
-"
-" function check system
-"
-
-function! MySys()
-	if has("win32")
-		return "windows"
-	else
-		return "linux"
-	endif
-endfunction
-
 
 "
 " Vim Settings
@@ -112,8 +110,10 @@ if has("gui_running")
 	set cursorline
 	hi cursorline guibg=#112233
 
+	" hide Toolbar and Menu bar
 	set guioptions-=T
 	set guioptions-=m
+	" <F4> Toggle show and hide
 	map <silent> <F4> :if &guioptions=~# 'T'<Bar>
 		\set guioptions-=T<Bar>
 		\set guioptions-=m<Bar>
@@ -133,8 +133,63 @@ if exists("&autochdir")
 	set autochdir
 endif
 
+" ctags
+function Do_Ctags()
+	if executable("ctags")
+		silent! execute "!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q ."
+	endif
+
+	if filereadable("tags")
+		execute "set tags=tags;"
+	endif
+endfunction
+set tags=tags;
+
+" cscope
+function Do_CsTag()
+	if(has("cscope") && executable("cscope"))
+		if(g:vimrc_iswindows!=1)
+			silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+		else
+			silent! execute "!dir /b /s *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+		endif
+
+		silent! execute "!cscope -b"
+
+		if filereadable("cscope.out")
+			silent! execute "cs add cscope.out"
+		endif
+	endif
+endfunction
+
+if has("cscope")
+	set cscopequickfix=s-,c-,d-,i-,t-,e-
+	set csto=0
+	set cst
+	set csverb
+
+	if filereadable("cscope.out")
+		silent! execute "cs add cscope.out"
+	endif
+endif
+
+" shortcut key
 inoremap <expr> <C-j> pumvisible()?"<C-n>":"<C-x><C-o>"
 inoremap <expr> <C-k> pumvisible()?"<C-p>":"<C-k>"
+map <leader>qq :q<CR>
+map <F5> :call Do_Ctags()<CR>
+map <F6> :call Do_CsTag()<CR>
+
+if has("cscope")
+	nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+	nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+	nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+	nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+	nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+	nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
+	nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
+endif
 
 
 "
@@ -166,11 +221,16 @@ let NERDTreeShowLineNumbers=1
 map <leader>nt :NERDTree<cr>
 
 " Taglist
-let Tlist_Show_One_File=1
+let Tlist_Auto_Highlight_Tag=1
+let Tlist_Auto_Open=0
+let Tlist_Auto_Update=1
+let Tlist_Close_On_Select=0
 let Tlist_Exit_OnlyWindow=1
-let Tlist_Use_Right_Window=1
 let Tlist_GainFocus_On_ToggleOpen=1
-let Tlist_WinWidth=25
+let Tlist_Inc_Winwidth=1
+let Tlist_Show_One_File=1
+let Tlist_Use_Right_Window=1
+let Tlist_WinWidth=40
 map <leader>tl :TlistToggle<cr>
 
 " neocomplcache
