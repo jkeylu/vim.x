@@ -2,9 +2,9 @@
 " check system
 "
 if (has("win32") || has("win95") || has("win64") || has("win16"))
-	let g:vimrc_iswindows=1
+	let s:vimrc_iswindows=1
 else
-	let g:vimrc_iswindows=0
+	let s:vimrc_iswindows=0
 endif
 
 
@@ -23,6 +23,7 @@ Bundle 'gmarik/vundle'
 " My Bundles
 " 
 " original epos on github
+Bundle 'ervandew/supertab'
 Bundle 'garbas/vim-snipmate'
 Bundle 'guileen/vim-node'
 Bundle 'honza/snipmate-snippets'
@@ -37,13 +38,15 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Shougo/neocomplcache'
 Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-markdown'
-Bundle 'vim-scripts/a.vim'
-Bundle 'vim-scripts/bufexplorer.zip'
-Bundle 'vim-scripts/FencView.vim'
-Bundle 'vim-scripts/LargeFile'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'vim-scripts/xoria256.vim'
 Bundle 'wavded/vim-stylus'
+" vim-scripts repos
+Bundle 'a.vim'
+Bundle 'bufexplorer.zip'
+Bundle 'DoxygenToolkit.vim'
+Bundle 'FencView.vim'
+Bundle 'LargeFile'
+Bundle 'taglist.vim'
+Bundle 'xoria256.vim'
 
 "
 " Vim Settings
@@ -148,7 +151,7 @@ set tags=tags;
 " cscope
 function Do_CsTag()
 	if(has("cscope") && executable("cscope"))
-		if(g:vimrc_iswindows!=1)
+		if(s:vimrc_iswindows!=1)
 			silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
 		else
 			silent! execute "!dir /b /s *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
@@ -177,8 +180,8 @@ endif
 inoremap <expr> <C-j> pumvisible()?"<C-n>":"<C-x><C-o>"
 inoremap <expr> <C-k> pumvisible()?"<C-p>":"<C-k>"
 map <leader>qq :q<CR>
-map <F5> :call Do_Ctags()<CR>
-map <F6> :call Do_CsTag()<CR>
+map <C-g>ct :call Do_Ctags()<CR>
+map <C-g>cs :call Do_CsTag()<CR>
 
 if has("cscope")
 	nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
@@ -190,6 +193,13 @@ if has("cscope")
 	nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
 	nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
 endif
+
+" Fast reload vimrc
+nmap <silent> <leader>ss :source $HOME/.vim/vimrc<CR>
+" Fast edit vimrc
+nmap <silent> <leader>ee :e $HOME/.vim/vimrc<CR>
+" When vimrc was edited, reload it immediately
+autocmd! BufWritePost s:vimrc_filename source $HOME/.vim/vimrc
 
 
 "
