@@ -137,7 +137,7 @@ if exists("&autochdir")
 endif
 
 " ctags
-function Do_Ctags()
+function! Do_Ctags()
 	if executable("ctags")
 		silent! execute "!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q ."
 	endif
@@ -149,7 +149,7 @@ endfunction
 set tags=tags;
 
 " cscope
-function Do_CsTag()
+function! Do_CsTag()
 	if(has("cscope") && executable("cscope"))
 		if(s:vimrc_iswindows!=1)
 			silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
