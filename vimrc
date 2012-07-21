@@ -1,18 +1,17 @@
 "
 " check system
 "
-if (has("win32") || has("win95") || has("win64") || has("win16"))
-	let s:vimrc_iswindows=1
-else
-	let s:vimrc_iswindows=0
-endif
+let s:is_unix = has('unix')
+let s:is_mswin = has('win16') || has('win32') || has('win64')
+let s:is_cygwin = has('win32unix')
+let s:is_macunix = !s:is_mswin && (has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin')
 
 
 set nocompatible	" be iMproved
 filetype off		" required!
 
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp +=~/.vim/bundle/vundle/
 call vundle#rc()
 
 
@@ -33,6 +32,7 @@ Bundle 'jkeylu/mark2666'
 Bundle 'jkeylu/vimdoc_cn'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'myusuf3/numbers.vim'
+Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Shougo/neocomplcache'
@@ -63,16 +63,16 @@ if &t_Co > 2 || has("gui_running")
 	set hlsearch
 endif
 
-let mapleader=","
+let mapleader = ","
 
-set fileencodings=utf-8,gbk,gb2312,cp936
-set fileformats=unix,dos
+set fileencodings =utf-8,gbk,gb2312,cp936
+set fileformats =unix,dos
 
 set number
 
-set backspace=indent,eol,start
+set backspace =indent,eol,start
 set nobackup
-set history=50
+set history =50
 set showcmd
 
 set incsearch
@@ -81,13 +81,13 @@ set ignorecase smartcase
 set smartindent
 set cindent
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop =4
+set softtabstop =4
+set shiftwidth =4
 set noexpandtab
 
 if has("mouse")
-	set mouse=a
+	set mouse =a
 endif
 
 if has("autocmd")
@@ -107,29 +107,29 @@ else
 endif
 
 if has("gui_running")
-	set lines=30
-	set columns=100
+	set lines =30
+	set columns =100
 
 	set cursorline
 	hi cursorline guibg=#112233
 
 	" hide Toolbar and Menu bar
-	set guioptions-=T
-	set guioptions-=m
+	set guioptions -=T
+	set guioptions -=m
 	" <F4> Toggle show and hide
 	map <silent> <F4> :if &guioptions=~# 'T'<Bar>
-		\set guioptions-=T<Bar>
-		\set guioptions-=m<Bar>
+		\set guioptions -=T<Bar>
+		\set guioptions -=m<Bar>
 		\else <Bar>
-		\set guioptions+=T<Bar>
-		\set guioptions+=m<Bar>
+		\set guioptions +=T<Bar>
+		\set guioptions +=m<Bar>
 		\endif<CR>
 endif
 
-set laststatus=2
-set statusline=\ %f%m%r%h%w\ \[%{&fileformat}\\%{&fileencoding}\]\ %=\ Line:%l/%L:%c
+set laststatus =2
+set statusline =\ %f%m%r%h%w\ \[%{&fileformat}\\%{&fileencoding}\]\ %=\ Line:%l/%L:%c
 
-set foldmethod=marker
+set foldmethod =marker
 nnoremap <space> @=((foldclosed(line('.'))<0) ? 'zc' : 'zo')<cr>
 
 if exists("&autochdir")
@@ -137,7 +137,7 @@ if exists("&autochdir")
 endif
 
 " ctags
-function! Do_Ctags()
+function! s:generate_ctags()
 	if executable("ctags")
 		silent! execute "!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q ."
 	endif
@@ -149,9 +149,9 @@ endfunction
 set tags=tags;
 
 " cscope
-function! Do_CsTag()
+function! s:generate_cscope()
 	if(has("cscope") && executable("cscope"))
-		if(s:vimrc_iswindows!=1)
+		if(!s:is_mswin)
 			silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
 		else
 			silent! execute "!dir /b /s *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
@@ -166,8 +166,8 @@ function! Do_CsTag()
 endfunction
 
 if has("cscope")
-	set cscopequickfix=s-,c-,d-,i-,t-,e-
-	set csto=0
+	set cscopequickfix =s-,c-,d-,i-,t-,e-
+	set csto =0
 	set cst
 	set csverb
 
@@ -180,8 +180,8 @@ endif
 inoremap <expr> <C-j> pumvisible()?"<C-n>":"<C-x><C-o>"
 inoremap <expr> <C-k> pumvisible()?"<C-p>":"<C-k>"
 map <leader>qq :q<CR>
-map <C-g>ct :call Do_Ctags()<CR>
-map <C-g>cs :call Do_CsTag()<CR>
+map <C-g>ct :call <SID>generate_ctags()<CR>
+map <C-g>cs :call <SID>generate_cscope()<CR>
 
 if has("cscope")
 	nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
@@ -202,56 +202,121 @@ nmap <silent> <leader>ee :e $HOME/.vim/vimrc<CR>
 autocmd! BufWritePost s:vimrc_filename source $HOME/.vim/vimrc
 
 
+
+
+"
+" Preview Current File In Chrome
+"
+
+" trim string
+function! s:trim(str)
+	return tlib#string#TrimLeft( tlib#string#TrimRight(a:str) )
+endfunction
+
+" get my name by whoami
+function! s:get_my_name()
+	let name = system("whoami")
+	if s:is_mswin
+		let temp = split(name, "\\")
+		let name = temp[len(temp) - 1]
+	endif
+	return s:trim(name)
+endfunction
+
+" get chrome path
+" if exists s:chrome_file_path, it will be return
+function! s:get_chrome_path()
+	if exists('s:chrome_file_path')
+		return s:chrome_file_path
+	endif
+
+	if s:is_cygwin || s:is_mswin
+		let chrome = "C:\\Users\\" . s:get_my_name() . "\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe"
+
+		if s:is_cygwin
+			let chrome = system("cygpath -u \"" . chrome . "\"")
+		endif
+
+		return s:trim(chrome)
+	endif
+endfunction
+
+" execute the command to open current file in browser
+function! s:preview_file_in_chrome()
+	let file = expand("%:p")
+	if s:is_cygwin
+		let file = system("cygpath -w " . file)
+	endif
+	let file = s:trim(file)
+
+	let chrome = s:get_chrome_path()
+	let command = chrome . " \"" . file . "\""
+
+	echo command
+	silent! execute "!" . command
+	redraw!
+	echo "open file in chrome: " . file
+endfunction
+
+map <Leader>pv :call <SID>preview_file_in_chrome()<CR>
+
+
+
+
 "
 " Plugins Settings
 "
+
+" dictionary
+if has("autocmd")
+	autocmd FileType javascript set dictionary +=$HOME/.vim/bundle/vim-node/dict/node.dict
+endif
 
 " bufexplorer
 map <leader><leader> <leader>be
 
 " fencview
-let g:fencview_autodetect=1
-let g:fencview_auto_patterns='*.cnx,*.txt,*.html,*.php,*.cpp,*.h,*.c,*.css,*.java{|\=}'
-let g:fencview_checklines=10
+let g:fencview_autodetect = 1
+let g:fencview_auto_patterns = '*.cnx,*.txt,*.html,*.php,*.cpp,*.h,*.c,*.css,*.java{|\=}'
+let g:fencview_checklines = 10
 
 " LargeFile
-let g:LargeFile=100
+let g:LargeFile = 100
 
 " Mark
 if has("gui_running")
-	let g:mwDefaultHighlightingPalette="extended"
-	let g:mwDefaultHighlightingNum=18
+	let g:mwDefaultHighlightingPalette = "extended"
+	let g:mwDefaultHighlightingNum = 18
 endif
 
 " NERD_Tree
-let NERDTreeChDirMode=2
-let NERDTreeWinSize=25
-let NERDTreeQuitOnOpen=1
-let NERDTreeShowLineNumbers=1
+let NERDTreeChDirMode = 2
+let NERDTreeWinSize = 25
+let NERDTreeQuitOnOpen =1
+let NERDTreeShowLineNumbers = 1
 map <leader>nt :NERDTree<cr>
 
 " Taglist
-let Tlist_Auto_Highlight_Tag=1
-let Tlist_Auto_Open=0
-let Tlist_Auto_Update=1
-let Tlist_Close_On_Select=0
-let Tlist_Exit_OnlyWindow=1
-let Tlist_GainFocus_On_ToggleOpen=1
-let Tlist_Inc_Winwidth=1
-let Tlist_Show_One_File=1
-let Tlist_Use_Right_Window=1
-let Tlist_WinWidth=40
+let Tlist_Auto_Highlight_Tag = 1
+let Tlist_Auto_Open = 0
+let Tlist_Auto_Update = 1
+let Tlist_Close_On_Select = 0
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Inc_Winwidth = 1
+let Tlist_Show_One_File = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_WinWidth = 40
 map <leader>tl :TlistToggle<cr>
 
 " neocomplcache
-let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_enable_camel_case_completion=1
-let g:neocomplcache_enable_underbar_completion=1
-let g:neocomplcache_min_syntax_length=3
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
 
-" dictionary
-if has("autocmd")
-	autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
-endif
+" vim-indent-guides
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
 
