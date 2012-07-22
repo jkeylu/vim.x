@@ -204,9 +204,13 @@ autocmd! BufWritePost s:vimrc_filename source $HOME/.vim/vimrc
 
 
 
+
 "
 " Preview Current File In Chrome
 "
+
+" uncomment next line and set chrome file path
+" let s:chrome_file_path = ""
 
 " trim string
 function! s:trim(str)
@@ -259,6 +263,15 @@ function! s:preview_file_in_chrome()
 endfunction
 
 map <Leader>pv :call <SID>preview_file_in_chrome()<CR>
+
+
+" convert file
+function! s:convert_file_to_unix_utf8()
+	set fileformat =unix
+	set fileencoding =utf-8
+endfunction
+
+map <C-g>ff :call<SID>convert_file_to_unix_utf8()<CR>
 
 
 
@@ -320,3 +333,5 @@ let g:neocomplcache_min_syntax_length = 3
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 
+" numbers
+nnoremap <F3> :NumbersToggle<CR>
