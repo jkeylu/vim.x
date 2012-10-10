@@ -34,7 +34,6 @@ if executable('curl') && executable('git')
 	Bundle 'mattn/gist-vim'
 	Bundle 'mattn/webapi-vim'
 endif
-Bundle 'myusuf3/numbers.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
