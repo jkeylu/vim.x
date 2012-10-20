@@ -83,10 +83,10 @@ set ignorecase smartcase
 set smartindent
 set cindent
 
-set tabstop =4
-set softtabstop =4
-set shiftwidth =4
 set noexpandtab
+set tabstop =2
+set shiftwidth =2
+set softtabstop =2
 
 if has("mouse")
 	set mouse =a
@@ -104,6 +104,7 @@ if has("autocmd")
 			\ exe "normal! g`\"" |
 			\ endif
 	augroup END
+	autocmd BufRead *.js,*.json set expandtab
 else
 	set autoindent
 endif
