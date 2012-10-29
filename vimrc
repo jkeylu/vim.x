@@ -60,7 +60,7 @@ if has("gui_running") || &t_Co == 256
 	colorscheme xoria256
 endif
 
-if &t_Co > 2 || has("gui_running")
+if has("gui_running") || &t_Co > 2
 	syntax on
 	set hlsearch
 endif
@@ -84,9 +84,9 @@ set smartindent
 set cindent
 
 set noexpandtab
-set tabstop =2
-set shiftwidth =2
-set softtabstop =2
+set tabstop =4
+set shiftwidth =4
+set softtabstop =4
 
 if has("mouse")
 	set mouse =a
@@ -104,7 +104,7 @@ if has("autocmd")
 			\ exe "normal! g`\"" |
 			\ endif
 	augroup END
-	autocmd BufRead *.js,*.json set expandtab
+	autocmd BufRead *.js,*.json set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 else
 	set autoindent
 endif
@@ -336,5 +336,3 @@ let g:neocomplcache_min_syntax_length = 3
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 
-" numbers
-nnoremap <F3> :NumbersToggle<CR>
