@@ -310,6 +310,7 @@ let NERDTreeChDirMode = 2
 let NERDTreeWinSize = 25
 let NERDTreeQuitOnOpen =1
 let NERDTreeShowLineNumbers = 1
+let NERDTreeDirArrows = 0
 map <leader>nt :NERDTree<cr>
 
 " Taglist
