@@ -1,11 +1,15 @@
-"
-" check system
+" Check System {{{1
 "
 let s:is_unix = has('unix')
 let s:is_mswin = has('win16') || has('win32') || has('win64')
 let s:is_cygwin = has('win32unix')
 let s:is_macunix = !s:is_mswin && (has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin')
 
+
+
+
+" Vundle Settings {{{1
+"
 
 set nocompatible	" be iMproved
 filetype off		" required!
@@ -50,8 +54,8 @@ Bundle 'LargeFile'
 Bundle 'taglist.vim'
 Bundle 'xoria256.vim'
 
-"
-" Vim Settings
+
+" Vim Settings {{{1
 "
 
 source $VIMRUNTIME/mswin.vim
@@ -279,8 +283,7 @@ map <C-g>ff :call<SID>convert_file_to_unix_utf8()<CR>
 
 
 
-"
-" Plugins Settings
+" Plugins Settings {{{1
 "
 
 " dictionary
