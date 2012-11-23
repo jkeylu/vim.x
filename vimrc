@@ -109,6 +109,7 @@ if has("autocmd")
 			\ endif
 	augroup END
 	autocmd BufRead *.js,*.json set expandtab tabstop=2 shiftwidth=2 softtabstop=2
+	autocmd BufRead *.md,*.markdown set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 else
 	set autoindent
 endif
