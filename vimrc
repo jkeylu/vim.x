@@ -51,7 +51,9 @@ Bundle 'bufexplorer.zip'
 Bundle 'DoxygenToolkit.vim'
 Bundle 'FencView.vim'
 Bundle 'LargeFile'
-Bundle 'taglist.vim'
+if executable('ctags')
+	Bundle 'taglist.vim'
+endif
 Bundle 'xoria256.vim'
 
 
@@ -319,17 +321,19 @@ let NERDTreeDirArrows = 0
 map <leader>nt :NERDTree<cr>
 
 " Taglist
-let Tlist_Auto_Highlight_Tag = 1
-let Tlist_Auto_Open = 0
-let Tlist_Auto_Update = 1
-let Tlist_Close_On_Select = 0
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Inc_Winwidth = 1
-let Tlist_Show_One_File = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 40
-map <leader>tl :TlistToggle<cr>
+if executable('ctags')
+	let Tlist_Auto_Highlight_Tag = 1
+	let Tlist_Auto_Open = 0
+	let Tlist_Auto_Update = 1
+	let Tlist_Close_On_Select = 0
+	let Tlist_Exit_OnlyWindow = 1
+	let Tlist_GainFocus_On_ToggleOpen = 1
+	let Tlist_Inc_Winwidth = 1
+	let Tlist_Show_One_File = 1
+	let Tlist_Use_Right_Window = 1
+	let Tlist_WinWidth = 40
+	map <leader>tl :TlistToggle<cr>
+endif
 
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1
