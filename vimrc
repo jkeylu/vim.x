@@ -79,14 +79,14 @@ endif
 
 let mapleader = ","
 
-set fileencodings =utf-8,gbk,gb2312,cp936
-set fileformats =unix,dos
+set fileencodings=utf-8,gbk,gb2312,cp936
+set fileformats=unix,dos
 
 set number
 
-set backspace =indent,eol,start
+set backspace=indent,eol,start
 set nobackup
-set history =50
+set history=50
 set showcmd
 
 set incsearch
@@ -96,12 +96,12 @@ set smartindent
 set cindent
 
 set noexpandtab
-set tabstop =4
-set shiftwidth =4
-set softtabstop =4
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 
 if has("mouse")
-	set mouse =a
+	set mouse=a
 endif
 
 if has("autocmd")
@@ -125,8 +125,8 @@ else
 endif
 
 if has("gui_running")
-	set lines =30
-	set columns =100
+	set lines=30
+	set columns=100
 
 	set cursorline
 	hi cursorline guibg=#112233
@@ -144,10 +144,10 @@ if has("gui_running")
 		\endif<CR>
 endif
 
-set laststatus =2
-set statusline =\ %f%m%r%h%w\ \[%{&fileformat}\\%{&fileencoding}\]\ %=\ Line:%l/%L:%c
+set laststatus=2
+set statusline=\ %f%m%r%h%w\ \[%{&fileformat}\\%{&fileencoding}\]\ %=\ Line:%l/%L:%c
 
-set foldmethod =marker
+set foldmethod=marker
 nnoremap <space> @=((foldclosed(line('.'))<0) ? 'zc' : 'zo')<cr>
 
 if exists("&autochdir")
@@ -184,8 +184,8 @@ function! s:generate_cscope()
 endfunction
 
 if has("cscope")
-	set cscopequickfix =s-,c-,d-,i-,t-,e-
-	set csto =0
+	set cscopequickfix=s-,c-,d-,i-,t-,e-
+	set csto=0
 	set cst
 	set csverb
 
@@ -222,8 +222,8 @@ autocmd! BufWritePost s:vimrc_filename source $HOME/.vim/vimrc
 
 " convert file
 function! s:convert_file_to_unix_utf8()
-	set fileformat =unix
-	set fileencoding =utf-8
+	set fileformat=unix
+	set fileencoding=utf-8
 endfunction
 
 map <C-g>ff :call<SID>convert_file_to_unix_utf8()<CR>
