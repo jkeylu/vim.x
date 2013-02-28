@@ -26,37 +26,41 @@ Bundle 'gmarik/vundle'
 " My Bundles
 " 
 " original epos on github
-Bundle 'ervandew/supertab'
+Bundle 'jkeylu/jsbeautify.vim'
+Bundle 'jkeylu/mark2666'
+Bundle 'jkeylu/vimdoc_cn'
 
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/snipmate-snippets'
 Bundle 'garbas/vim-snipmate'
 
+Bundle 'ervandew/supertab'
 Bundle 'guileen/vim-node'
-Bundle 'jkeylu/jsbeautify.vim'
-Bundle 'jkeylu/mark2666'
-Bundle 'jkeylu/vimdoc_cn'
-if executable('curl') && executable('git')
-	Bundle 'mattn/gist-vim'
-	Bundle 'mattn/webapi-vim'
-endif
+Bundle 'kchmck/vim-coffee-script'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Shougo/neocomplcache'
 Bundle 'tpope/vim-markdown'
 Bundle 'wavded/vim-stylus'
+
+if executable('curl') && executable('git')
+	Bundle 'mattn/gist-vim'
+	Bundle 'mattn/webapi-vim'
+endif
+
 " vim-scripts repos
 Bundle 'a.vim'
 Bundle 'bufexplorer.zip'
 Bundle 'DoxygenToolkit.vim'
 Bundle 'FencView.vim'
 Bundle 'LargeFile'
+Bundle 'xoria256.vim'
+
 if executable('ctags')
 	Bundle 'taglist.vim'
 endif
-Bundle 'xoria256.vim'
 
 
 " Vim Settings {{{1
@@ -113,6 +117,7 @@ if has("autocmd")
 			\ endif
 	augroup END
 	autocmd BufNewFile,BufRead *.js,*.json set expandtab tabstop=2 shiftwidth=2 softtabstop=2
+	autocmd BufNewFile,BufRead *.coffee set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 	autocmd BufNewFile,BufRead *.md,*.markdown set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 	autocmd BufNewFile,BufRead *.tpl set filetype=html
 else
