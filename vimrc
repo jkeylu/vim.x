@@ -27,13 +27,16 @@ Bundle 'gmarik/vundle'
 " 
 " original epos on github
 Bundle 'ervandew/supertab'
-Bundle 'garbas/vim-snipmate'
-Bundle 'guileen/vim-node'
+
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
 Bundle 'honza/snipmate-snippets'
+Bundle 'garbas/vim-snipmate'
+
+Bundle 'guileen/vim-node'
 Bundle 'jkeylu/jsbeautify.vim'
 Bundle 'jkeylu/mark2666'
 Bundle 'jkeylu/vimdoc_cn'
-Bundle 'MarcWeber/vim-addon-mw-utils'
 if executable('curl') && executable('git')
 	Bundle 'mattn/gist-vim'
 	Bundle 'mattn/webapi-vim'
@@ -42,7 +45,6 @@ Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Shougo/neocomplcache'
-Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-markdown'
 Bundle 'wavded/vim-stylus'
 " vim-scripts repos
@@ -211,69 +213,6 @@ nmap <silent> <leader>ss :source $HOME/.vim/vimrc<CR>
 nmap <silent> <leader>ee :e $HOME/.vim/vimrc<CR>
 " When vimrc was edited, reload it immediately
 autocmd! BufWritePost s:vimrc_filename source $HOME/.vim/vimrc
-
-
-
-
-
-"
-" Preview Current File In Chrome
-"
-
-" uncomment next line and set chrome file path
-" let s:chrome_file_path = ""
-
-" trim string
-function! s:trim(str)
-	return tlib#string#TrimLeft( tlib#string#TrimRight(a:str) )
-endfunction
-
-" get my name by whoami
-function! s:get_my_name()
-	let name = system("whoami")
-	if s:is_mswin
-		let temp = split(name, "\\")
-		let name = temp[len(temp) - 1]
-	endif
-	return s:trim(name)
-endfunction
-
-" get chrome path
-" if exists s:chrome_file_path, it will be return
-function! s:get_chrome_path()
-	if exists('s:chrome_file_path')
-		return s:chrome_file_path
-	endif
-
-	if s:is_cygwin || s:is_mswin
-		let chrome = "C:\\Users\\" . s:get_my_name() . "\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe"
-
-		if s:is_cygwin
-			let chrome = system("cygpath -u \"" . chrome . "\"")
-		endif
-
-		return s:trim(chrome)
-	endif
-endfunction
-
-" execute the command to open current file in browser
-function! s:preview_file_in_chrome()
-	let file = expand("%:p")
-	if s:is_cygwin
-		let file = system("cygpath -w " . file)
-	endif
-	let file = s:trim(file)
-
-	let chrome = s:get_chrome_path()
-	let command = chrome . " \"" . file . "\""
-
-	echo command
-	silent! execute "!" . command
-	redraw!
-	echo "open file in chrome: " . file
-endfunction
-
-map <Leader>pv :call <SID>preview_file_in_chrome()<CR>
 
 
 " convert file
