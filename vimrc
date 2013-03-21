@@ -217,7 +217,9 @@ nmap <silent> <leader>ss :source $HOME/.vim/vimrc<CR>
 " Fast edit vimrc
 nmap <silent> <leader>ee :e $HOME/.vim/vimrc<CR>
 " When vimrc was edited, reload it immediately
-autocmd! BufWritePost s:vimrc_filename source $HOME/.vim/vimrc
+if has("autocmd")
+	autocmd! BufWritePost s:vimrc_filename source $HOME/.vim/vimrc
+endif
 
 
 " convert file
