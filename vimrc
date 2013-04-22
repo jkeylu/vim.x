@@ -26,7 +26,6 @@ Bundle 'gmarik/vundle'
 " My Bundles
 " 
 " original epos on github
-Bundle 'jkeylu/jsbeautify.vim'
 Bundle 'jkeylu/mark2666'
 Bundle 'jkeylu/vimdoc_cn'
 
