@@ -36,6 +36,7 @@ Bundle 'garbas/vim-snipmate'
 
 Bundle 'ervandew/supertab'
 Bundle 'guileen/vim-node'
+Bundle 'hynek/vim-python-pep8-indent'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
