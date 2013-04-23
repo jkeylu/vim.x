@@ -15,7 +15,7 @@ set nocompatible	" be iMproved
 filetype off		" required!
 
 
-set rtp +=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 
@@ -24,7 +24,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My Bundles
-" 
+"
 " original epos on github
 Bundle 'jkeylu/mark2666'
 Bundle 'jkeylu/vimdoc_cn'
@@ -130,15 +130,15 @@ if has("gui_running")
 	hi cursorline guibg=#112233
 
 	" hide Toolbar and Menu bar
-	set guioptions -=T
-	set guioptions -=m
+	set guioptions-=T
+	set guioptions-=m
 	" <F4> Toggle show and hide
 	map <silent> <F4> :if &guioptions=~# 'T'<Bar>
-		\set guioptions -=T<Bar>
-		\set guioptions -=m<Bar>
+		\set guioptions-=T<Bar>
+		\set guioptions-=m<Bar>
 		\else <Bar>
-		\set guioptions +=T<Bar>
-		\set guioptions +=m<Bar>
+		\set guioptions+=T<Bar>
+		\set guioptions+=m<Bar>
 		\endif<CR>
 endif
 
@@ -243,7 +243,7 @@ map <C-g>ff :call<SID>convert_file_to_unix_utf8()<CR>
 
 " dictionary
 if has("autocmd")
-	autocmd FileType javascript set dictionary +=$HOME/.vim/bundle/vim-node/dict/node.dict
+	autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
 endif
 
 " bufexplorer
