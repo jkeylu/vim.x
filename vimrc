@@ -66,8 +66,6 @@ endif
 " Vim Settings {{{1
 "
 
-source $VIMRUNTIME/mswin.vim
-
 if has("gui_running") || &t_Co == 256
 	colorscheme xoria256
 endif
