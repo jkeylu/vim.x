@@ -66,6 +66,8 @@ endif
 " Vim Settings {{{1
 "
 
+behave mswin
+
 if has("gui_running") || &t_Co == 256
 	colorscheme xoria256
 endif
