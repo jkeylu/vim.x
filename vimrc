@@ -67,6 +67,7 @@ endif
 "
 
 behave mswin
+set clipboard+=unnamed
 
 if has("gui_running") || &t_Co == 256
 	colorscheme xoria256
