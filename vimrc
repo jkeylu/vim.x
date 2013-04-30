@@ -120,7 +120,7 @@ if has("autocmd")
 	autocmd BufNewFile,BufRead *.js,*.json set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 	autocmd BufNewFile,BufRead *.coffee set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 	autocmd BufNewFile,BufRead *.md,*.markdown set expandtab tabstop=4 shiftwidth=4 softtabstop=4
-	autocmd BufNewFile,BufRead *.tpl set filetype=html
+	autocmd BufNewFile,BufRead *.html, *.tpl set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 else
 	set autoindent
 endif
