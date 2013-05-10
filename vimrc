@@ -1,9 +1,9 @@
 " Check System {{{1
 "
-let s:is_unix = has('unix')
-let s:is_mswin = has('win16') || has('win32') || has('win64')
-let s:is_cygwin = has('win32unix')
-let s:is_macunix = !s:is_mswin && (has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin')
+let s:is_unix = has("unix")
+let s:is_mswin = has("win16") || has("win32") || has("win64")
+let s:is_cygwin = has("win32unix")
+let s:is_macunix = !s:is_mswin && (has("mac") || has("macunix") || has("gui_macvim") || system("uname") =~? "^darwin")
 
 
 
@@ -21,45 +21,46 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Bundle "gmarik/vundle"
 
 " My Bundles
 "
 " original epos on github
-Bundle 'jkeylu/mark2666'
-Bundle 'jkeylu/vimdoc_cn'
+Bundle "jkeylu/mark2666"
+Bundle "jkeylu/vimdoc_cn"
 
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'honza/vim-snippets'
-Bundle 'garbas/vim-snipmate'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/vim-snippets"
+Bundle "garbas/vim-snipmate"
 
-Bundle 'ervandew/supertab'
-Bundle 'guileen/vim-node'
-Bundle 'hynek/vim-python-pep8-indent'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'Shougo/neocomplcache'
-Bundle 'tpope/vim-markdown'
-Bundle 'wavded/vim-stylus'
+Bundle "ervandew/supertab"
+Bundle "guileen/vim-node"
+Bundle "hynek/vim-python-pep8-indent"
+Bundle "kchmck/vim-coffee-script"
+Bundle "nathanaelkane/vim-indent-guides"
+Bundle "pangloss/vim-javascript"
+Bundle "scrooloose/nerdcommenter"
+Bundle "scrooloose/nerdtree"
+Bundle "Shougo/neocomplcache"
+Bundle "tpope/vim-markdown"
+Bundle "wavded/vim-stylus"
 
-if executable('curl') && executable('git')
-	Bundle 'mattn/gist-vim'
-	Bundle 'mattn/webapi-vim'
+if executable("curl") && executable("git")
+	Bundle "mattn/gist-vim"
+	Bundle "mattn/webapi-vim"
 endif
 
 " vim-scripts repos
-Bundle 'a.vim'
-Bundle 'bufexplorer.zip'
-Bundle 'DoxygenToolkit.vim'
-Bundle 'FencView.vim'
-Bundle 'LargeFile'
-Bundle 'xoria256.vim'
+Bundle "a.vim"
+Bundle "bufexplorer.zip"
+Bundle "DoxygenToolkit.vim"
+Bundle "FencView.vim"
+Bundle "LargeFile"
+Bundle "xoria256.vim"
 
-if executable('ctags')
-	Bundle 'taglist.vim'
+if executable("ctags")
+	Bundle "taglist.vim"
 endif
 
 
@@ -156,7 +157,7 @@ if exists("&autochdir")
 endif
 
 " Ruler
-if exists('+colorcolumn')
+if exists("+colorcolumn")
 	set colorcolumn=80
 else
 	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
@@ -254,7 +255,7 @@ map <leader><leader> <leader>be
 
 " fencview
 let g:fencview_autodetect = 1
-let g:fencview_auto_patterns = '*.cnx,*.txt,*.html,*.php,*.cpp,*.h,*.c,*.css,*.java{|\=}'
+let g:fencview_auto_patterns = "*.cnx,*.txt,*.html,*.php,*.cpp,*.h,*.c,*.css,*.java{|\=}"
 let g:fencview_checklines = 10
 
 " LargeFile
@@ -275,7 +276,7 @@ let NERDTreeDirArrows = 0
 map <leader>nt :NERDTree<cr>
 
 " Taglist
-if executable('ctags')
+if executable("ctags")
 	let Tlist_Auto_Highlight_Tag = 1
 	let Tlist_Auto_Open = 0
 	let Tlist_Auto_Update = 1
@@ -304,3 +305,7 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 
+" vim-javascript
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
