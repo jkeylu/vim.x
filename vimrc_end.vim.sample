@@ -1,0 +1,1 @@
+let g:neocomplcache_disable_auto_complete = 1

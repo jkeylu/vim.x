@@ -292,9 +292,6 @@ endif
 
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1
-if s:is_unix && !s:is_cygwin
-	let g:neocomplcache_disable_auto_complete = 1
-endif
 let g:neocomplcache_auto_completion_start_length = 4
 let g:neocomplcache_manual_completion_start_length = 4
 let g:neocomplcache_enable_smart_case = 1
@@ -309,3 +306,11 @@ let g:indent_guides_start_level = 2
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
+
+
+" Platform Settings{{{1
+"
+
+if filereadable($HOME.'/.vim/vimrc_end.vim')
+	source $HOME/.vim/vimrc_end.vim
+endif
