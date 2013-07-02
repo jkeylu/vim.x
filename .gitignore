@@ -1,0 +1,6 @@
+*.swp
+.netrwhist
+vimrc_start.vim
+vimrc_end.vim
+
+bundle/
