@@ -5,7 +5,7 @@
 " Check Platform {{{1
 "
 
-source ~/.vim/settings/platform.vim
+source ~/.vim/setting.platform.vim
 
 
 
@@ -79,28 +79,21 @@ endif
 " Vim Settings {{{1
 "
 
-source ~/.vim/settings/base.vim
-source ~/.vim/settings/syntax.vim
-source ~/.vim/settings/format.vim
-source ~/.vim/settings/file.vim
-source ~/.vim/settings/gui.vim
-source ~/.vim/settings/search.vim
-source ~/.vim/settings/functions.vim
+source ~/.vim/setting.default.vim
 
 
 
 " Plugins Settings {{{1
 "
 
-set runtimepath+=~/.vim/
-runtime! settings/plugins/*.vim
+source ~/.vim/setting.plugin.vim
 
 
 
 " Map Key {{{1
 "
 
-source ~/.vim/settings/keymap.vim
+source ~/.vim/setting.keymap.vim
 
 
 
