@@ -2,6 +2,9 @@
 " author: jKey Lu <jkeylu@gmail.com>
 "
 
+" save read-only file
+cmap w!! %!sudo tee > /dev/null %
+
 " toggle fold
 nnoremap <space> @=((foldclosed(line('.'))<0) ? 'zc' : 'zo')<cr>
 
