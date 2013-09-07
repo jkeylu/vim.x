@@ -92,3 +92,10 @@ let g:html_indent_style1 = 'inc'
 if has('autocmd')
   autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
 endif
+
+
+
+" CtrlP {{{1
+"
+
+let g:ctrlp_extensions = ['funky']

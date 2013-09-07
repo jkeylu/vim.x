@@ -43,3 +43,8 @@ map <leader>nt :NERDTree<cr>
 if executable('ctags')
   map <leader>tl :TlistToggle<cr>
 endif
+
+" ctrlp-funky
+nnoremap <leader>fu :CtrlPFunky<CR>
+" narrow the list down with a word under cursor
+nnoremap <leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<CR>

@@ -36,18 +36,22 @@ Bundle 'honza/vim-snippets'
 Bundle 'garbas/vim-snipmate'
 
 Bundle 'ervandew/supertab'
+Bundle 'mattn/zencoding-vim'
+Bundle 'Shougo/neocomplcache'
+
 Bundle 'guileen/vim-node'
 Bundle 'hynek/vim-python-pep8-indent'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-Bundle 'mattn/zencoding-vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'pangloss/vim-javascript'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'Shougo/neocomplcache'
 Bundle 'tpope/vim-markdown'
 Bundle 'wavded/vim-stylus'
+
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+
+Bundle 'kien/ctrlp.vim'
+Bundle 'tacahiroy/ctrlp-funky'
 
 if executable('curl') && executable('git')
   Bundle 'mattn/gist-vim'
