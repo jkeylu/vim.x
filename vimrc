@@ -40,6 +40,10 @@ Bundle 'mattn/emmet-vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'jiangmiao/auto-pairs'
 
+if executable('git')
+  Bundle 'tpope/vim-fugitive'
+endif
+
 Bundle 'guileen/vim-node'
 Bundle 'hynek/vim-python-pep8-indent'
 Bundle 'kchmck/vim-coffee-script'
