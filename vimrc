@@ -28,7 +28,7 @@ Bundle 'gmarik/vundle'
 "
 " original epos on github
 Bundle 'jkeylu/mark2666'
-Bundle 'jkeylu/vimdoc_cn'
+Bundle 'jkeylu/vimcdoc'
 
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
