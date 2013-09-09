@@ -39,6 +39,7 @@ Bundle 'ervandew/supertab'
 Bundle 'mattn/emmet-vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'jiangmiao/auto-pairs'
+Bundle 'mhinz/vim-startify'
 
 if executable('git')
   Bundle 'tpope/vim-fugitive'
