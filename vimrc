@@ -36,7 +36,7 @@ Bundle 'honza/vim-snippets'
 Bundle 'garbas/vim-snipmate'
 
 Bundle 'ervandew/supertab'
-Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/emmet-vim'
 Bundle 'Shougo/neocomplcache'
 
 Bundle 'guileen/vim-node'
