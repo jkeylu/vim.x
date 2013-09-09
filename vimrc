@@ -38,6 +38,7 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'ervandew/supertab'
 Bundle 'mattn/emmet-vim'
 Bundle 'Shougo/neocomplcache'
+Bundle 'jiangmiao/auto-pairs'
 
 Bundle 'guileen/vim-node'
 Bundle 'hynek/vim-python-pep8-indent'
