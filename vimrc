@@ -53,6 +53,8 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 
+Bundle 'terryma/vim-multiple-cursors'
+
 if executable('curl') && executable('git')
   Bundle 'mattn/gist-vim'
   Bundle 'mattn/webapi-vim'
