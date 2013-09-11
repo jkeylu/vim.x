@@ -39,9 +39,9 @@ map <leader><leader> <leader>be
 " nerdtree
 map <leader>nt :NERDTree<cr>
 
-" taglist
+" tagbar
 if executable('ctags')
-  map <leader>tl :TlistToggle<cr>
+  nnoremap <leader>tl :TagbarToggle<cr>
 endif
 
 " ctrlp-funky

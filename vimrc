@@ -41,6 +41,10 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'mhinz/vim-startify'
 
+if executable('ctags')
+  Bundle 'majutsushi/tagbar'
+endif
+
 if executable('git')
   Bundle 'tpope/vim-fugitive'
 endif
@@ -73,10 +77,6 @@ Bundle 'DoxygenToolkit.vim'
 Bundle 'FencView.vim'
 Bundle 'LargeFile'
 Bundle 'xoria256.vim'
-
-if executable('ctags')
-  Bundle 'taglist.vim'
-endif
 
 
 
