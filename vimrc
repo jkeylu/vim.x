@@ -74,9 +74,14 @@ endif
 Bundle 'a.vim'
 Bundle 'bufexplorer.zip'
 Bundle 'DoxygenToolkit.vim'
-Bundle 'FencView.vim'
 Bundle 'LargeFile'
 Bundle 'xoria256.vim'
+
+" No iconv in windows?
+" Download: https://github.com/jkeylu/vim.x/blob/master/windows/libiconv.dll?raw=true
+if has('iconv')
+  Bundle 'FencView.vim'
+endif
 
 
 
