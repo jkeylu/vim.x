@@ -3,7 +3,9 @@
 "
 
 " save read-only file
-cmap w!! %!sudo tee > /dev/null %
+if executable('sudo')
+  cmap w!! %!sudo tee > /dev/null %
+endif
 
 " toggle fold
 nnoremap <space> @=((foldclosed(line('.'))<0) ? 'zc' : 'zo')<cr>
@@ -11,9 +13,8 @@ nnoremap <space> @=((foldclosed(line('.'))<0) ? 'zc' : 'zo')<cr>
 inoremap <expr> <C-j> pumvisible()?'<C-n>':'<C-x><C-o>'
 inoremap <expr> <C-k> pumvisible()?'<C-p>':'<C-k>'
 
-map <leader>qq :q<CR>
-map <C-g>ct :call <SID>generate_ctags()<CR>
-map <C-g>cs :call <SID>generate_cscope()<CR>
+nnoremap <C-g>ct :call <SID>generate_ctags()<CR>
+nnoremap <C-g>cs :call <SID>generate_cscope()<CR>
 
 if has('cscope')
   nmap <C-\>s :cs find s <C-R>=expand('<cword>')<CR><CR>:copen<CR>
@@ -31,13 +32,13 @@ nmap <silent> <leader>ss :source ~/.vim/vimrc<CR>
 " Fast edit vimrc
 nmap <silent> <leader>ee :e ~/.vim/vimrc<CR>
 
-map <C-g>ff :call<SID>convert_file_to_unix_utf8()<CR>
+nnoremap <C-g>ff :call<SID>convert_file_to_unix_utf8()<CR>
 
 " bufexplorer
-map <leader><leader> <leader>be
+nmap <leader><leader> <leader>be
 
 " nerdtree
-map <leader>nt :NERDTree<cr>
+nnoremap <leader>nt :NERDTree<cr>
 
 " tagbar
 if executable('ctags')
