@@ -27,6 +27,7 @@ Bundle 'gmarik/vundle'
 " My Bundles
 "
 " original epos on github
+Bundle 'junegunn/seoul256.vim'
 Bundle 'jkeylu/mark2666'
 Bundle 'jkeylu/vimcdoc'
 
@@ -75,7 +76,6 @@ Bundle 'a.vim'
 Bundle 'bufexplorer.zip'
 Bundle 'DoxygenToolkit.vim'
 Bundle 'LargeFile'
-Bundle 'xoria256.vim'
 
 " No iconv in windows?
 " Download: https://github.com/jkeylu/vim.x/blob/master/windows/libiconv.dll?raw=true
