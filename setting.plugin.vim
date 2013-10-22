@@ -96,9 +96,3 @@ let g:ctrlp_extensions = ['funky']
 
 
 
-" vim-startify {{{1
-"
-
-let g:startify_session_dir = '~/.vim-sessions'
-let g:startify_list_order = ['files', 'bookmarks', 'sessions']
-let g:startify_session_persistence = 1

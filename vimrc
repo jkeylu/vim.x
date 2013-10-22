@@ -40,7 +40,6 @@ Bundle 'ervandew/supertab'
 Bundle 'mattn/emmet-vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'jiangmiao/auto-pairs'
-Bundle 'mhinz/vim-startify'
 
 if executable('ctags')
   Bundle 'majutsushi/tagbar'
@@ -66,11 +65,6 @@ Bundle 'tacahiroy/ctrlp-funky'
 
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'jlanzarotta/bufexplorer'
-
-if executable('curl') && executable('git')
-  Bundle 'mattn/gist-vim'
-  Bundle 'mattn/webapi-vim'
-endif
 
 " vim-scripts repos
 Bundle 'a.vim'
