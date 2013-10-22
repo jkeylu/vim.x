@@ -65,6 +65,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 
 Bundle 'terryma/vim-multiple-cursors'
+Bundle 'jlanzarotta/bufexplorer'
 
 if executable('curl') && executable('git')
   Bundle 'mattn/gist-vim'
@@ -73,7 +74,6 @@ endif
 
 " vim-scripts repos
 Bundle 'a.vim'
-Bundle 'bufexplorer.zip'
 Bundle 'DoxygenToolkit.vim'
 Bundle 'LargeFile'
 
