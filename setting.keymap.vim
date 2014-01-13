@@ -2,6 +2,13 @@
 " author: jKey Lu <jkeylu@gmail.com>
 "
 
+" [Avoid the escape key](http://vim.wikia.com/wiki/Avoid_the_escape_key)
+inoremap <Esc> <Esc>`^
+imap jj <Esc>
+nnoremap <Tab> <Esc>
+vnoremap <Tab> <Esc>
+onoremap <Tab> <Esc>
+
 " save read-only file
 if executable('sudo')
   cmap w!! %!sudo tee > /dev/null %
