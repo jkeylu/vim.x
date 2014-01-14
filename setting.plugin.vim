@@ -96,3 +96,10 @@ let g:ctrlp_extensions = ['funky']
 
 
 
+" vim-multiple-cursors {{{1
+"
+
+let g:multi_cursor_quit_key = '<Tab>'
+
+
+
