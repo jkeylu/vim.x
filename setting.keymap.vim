@@ -3,8 +3,7 @@
 "
 
 " [Avoid the escape key](http://vim.wikia.com/wiki/Avoid_the_escape_key)
-inoremap <Esc> <Esc>`^
-imap jj <Esc>
+imap jj <Esc>`^
 nnoremap <Tab> <Esc>
 vnoremap <Tab> <Esc>
 onoremap <Tab> <Esc>
