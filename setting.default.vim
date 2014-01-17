@@ -48,7 +48,7 @@ set background=dark
 
 if &t_Co >= 256 || has('gui_running')
   let g:seoul256_background = 234
-  colorscheme seoul256
+  silent! colorscheme seoul256
 endif
 
 
