@@ -102,4 +102,7 @@ let g:ctrlp_extensions = ['funky']
 let g:multi_cursor_quit_key = '<Tab>'
 
 
+" auto-pairs
+"
 
+let g:AutoPairsMapCR = 0

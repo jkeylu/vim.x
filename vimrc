@@ -39,7 +39,6 @@ Bundle 'jkeylu/vimcdoc'
 Bundle 'ervandew/supertab'
 Bundle 'mattn/emmet-vim'
 Bundle 'Shougo/neocomplcache'
-Bundle 'jiangmiao/auto-pairs'
 
 if executable('ctags')
   Bundle 'majutsushi/tagbar'
@@ -76,6 +75,9 @@ Bundle 'LargeFile'
 if has('iconv')
   Bundle 'FencView.vim'
 endif
+
+" Always load auto-pairs at last.
+Bundle 'jiangmiao/auto-pairs'
 
 
 
