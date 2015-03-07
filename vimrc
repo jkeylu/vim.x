@@ -64,6 +64,7 @@ Bundle 'tacahiroy/ctrlp-funky'
 
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'jlanzarotta/bufexplorer'
+Bundle 'yonchu/accelerated-smooth-scroll'
 
 " vim-scripts repos
 Bundle 'a.vim'
