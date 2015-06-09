@@ -9,76 +9,99 @@ source ~/.vim/setting.platform.vim
 
 
 
-" Vundle Settings {{{1
+" NeoBundle Settings {{{1
 "
 
-set nocompatible	" be iMproved
-filetype off		" required!
+" Note: Skip initialization for vim-tiny or vim-small
+if 0 | endif
 
+if has('vim_starting')
+  if &compatible
+    set nocompatible " be iMproved
+  endif
 
-set runtimepath+=~/.vim/bundle/vundle/
-call vundle#rc()
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+" let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
 
-" My Bundles
+" My Bundles here:
 "
-" original epos on github
-Bundle 'junegunn/seoul256.vim'
-Bundle 'jkeylu/mark2666'
-Bundle 'jkeylu/vimcdoc'
+" original repos on github
+NeoBundle 'junegunn/seoul256.vim'
+NeoBundle 'jkeylu/mark2666'
+NeoBundle 'jkeylu/vimcdoc'
 
-"Bundle 'MarcWeber/vim-addon-mw-utils'
-"Bundle 'tomtom/tlib_vim'
-"Bundle 'honza/vim-snippets'
-"Bundle 'garbas/vim-snipmate'
+NeoBundle 'Shougo/vimproc.vim', {
+\   'build': {
+\     'windows': '"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat" && nmake -f make_msvc.mak nodebug=1 "SDK_INCLUDE_DIR=C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include"',
+\     'cygwin': 'make -f make_cygwin.mak',
+\     'mac': 'make -f make_mac.mak',
+\     'linux': 'make',
+\     'unix': 'gmake'
+\   }
+\ }
 
-Bundle 'ervandew/supertab'
-Bundle 'mattn/emmet-vim'
-Bundle 'Shougo/neocomplcache'
+"NeoBundle 'MarcWeber/vim-addon-mw-utils'
+"NeoBundle 'tomtom/tlib_vim'
+"NeoBundle 'honza/vim-snippets'
+"NeoBundle 'garbas/vim-snipmate'
+
+NeoBundle 'ervandew/supertab'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'Shougo/neocomplcache'
 
 if executable('ctags')
-  Bundle 'majutsushi/tagbar'
+  NeoBundle 'majutsushi/tagbar'
 endif
 
 if executable('git')
-  Bundle 'tpope/vim-fugitive'
+  NeoBundle 'tpope/vim-fugitive'
 endif
 
-Bundle 'guileen/vim-node'
-Bundle 'hynek/vim-python-pep8-indent'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'pangloss/vim-javascript'
-Bundle 'tpope/vim-markdown'
-Bundle 'wavded/vim-stylus'
+NeoBundle 'guileen/vim-node'
+NeoBundle 'hynek/vim-python-pep8-indent'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'wavded/vim-stylus'
 
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/nerdtree'
 
-Bundle 'kien/ctrlp.vim'
-Bundle 'tacahiroy/ctrlp-funky'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'tacahiroy/ctrlp-funky'
 
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'jlanzarotta/bufexplorer'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'jlanzarotta/bufexplorer'
+NeoBundle 'yonchu/accelerated-smooth-scroll'
 
 " vim-scripts repos
-Bundle 'a.vim'
-Bundle 'DoxygenToolkit.vim'
-Bundle 'LargeFile'
+NeoBundle 'a.vim'
+NeoBundle 'DoxygenToolkit.vim'
+NeoBundle 'LargeFile'
 
 " No iconv in windows?
 " Download: https://github.com/jkeylu/vim.x/blob/master/windows/libiconv.dll?raw=true
 if has('iconv')
-  Bundle 'FencView.vim'
+  NeoBundle 'FencView.vim'
 endif
 
 " Always load auto-pairs at last.
-Bundle 'jiangmiao/auto-pairs'
+NeoBundle 'jiangmiao/auto-pairs'
 
+call neobundle#end()
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
 
 
 " Start {{{1
