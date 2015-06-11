@@ -2,29 +2,35 @@
 " author: jKey Lu <jkeylu@gmail.com>
 "
 
+" Note: Skip initialization for vim-tiny or vim-small
+if 0 | endif
+
 " Check Platform {{{1
 "
 
 source ~/.vim/vimrc.platform
 
 
+" Load default env {{{1
+"
+
+source ~/.vim/vimrc.env
+
+
+
+" Before {{{1
+"
+
+if filereadable(expand('~/.vim/vimrc.before'))
+  source ~/.vim/vimrc.before
+endif
+
+
 
 " NeoBundle Settings {{{1
 "
 
-" Note: Skip initialization for vim-tiny or vim-small
-if 0 | endif
-
 source ~/.vim/vimrc.bundles
-
-
-
-" Start {{{1
-"
-
-if filereadable($HOME.'/.vim/vimrc.start')
-  source ~/.vim/vimrc.start
-endif
 
 
 
@@ -49,9 +55,11 @@ source ~/.vim/vimrc.keymap
 
 
 
-" End {{{1
+" After {{{1
 "
 
-if filereadable($HOME.'/.vim/vimrc.end')
-	source ~/.vim/vimrc.end
+if filereadable(expand('~/.vim/vimrc.after'))
+  source ~/.vim/vimrc.after
 endif
+
+" vim:ft=vim fdm=marker et ts=2 sw=2 sts=2

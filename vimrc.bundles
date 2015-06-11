@@ -85,3 +85,5 @@ call neobundle#end()
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
+
+" vim:ft=vim fdm=marker et ts=2 sw=2 sts=2

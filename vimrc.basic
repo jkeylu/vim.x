@@ -33,6 +33,9 @@ else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
+" Read first line or last line to exec modeline
+set modelines=1
+
 let mapleader = ','
 
 
@@ -190,3 +193,5 @@ function! s:convert_file_to_unix_utf8()
   set fileformat=unix
   set fileencoding=utf-8
 endfunction
+
+" vim:ft=vim fdm=marker et ts=2 sw=2 sts=2

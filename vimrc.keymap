@@ -55,3 +55,5 @@ endif
 nnoremap <leader>fu :CtrlPFunky<CR>
 " narrow the list down with a word under cursor
 nnoremap <leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<CR>
+
+" vim:ft=vim fdm=marker et ts=2 sw=2 sts=2

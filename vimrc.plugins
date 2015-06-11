@@ -106,3 +106,5 @@ let g:multi_cursor_quit_key = '<Tab>'
 "
 
 let g:AutoPairsMapCR = 0
+
+" vim:ft=vim fdm=marker et ts=2 sw=2 sts=2
