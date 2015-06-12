@@ -5,6 +5,12 @@
 " Note: Skip initialization for vim-tiny or vim-small
 if 0 | endif
 
+if &compatible
+  set nocompatible " be iMproved
+endif
+
+
+
 " Check Platform {{{1
 "
 
@@ -62,4 +68,4 @@ if filereadable(expand('~/.vim/vimrc.after'))
   source ~/.vim/vimrc.after
 endif
 
-" vim:ft=vim fdm=marker et ts=2 sw=2 sts=2
+" vim:ft=vim fdm=marker et ts=4 sw=2 sts=2

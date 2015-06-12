@@ -1,8 +1,8 @@
-if has('vim_starting')
-  if &compatible
-    set nocompatible " be iMproved
-  endif
+"
+" author: jKey Lu <jkeylu@gmail.com>
+"
 
+if has('vim_starting')
   " Required:
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
@@ -86,4 +86,4 @@ call neobundle#end()
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
-" vim:ft=vim fdm=marker et ts=2 sw=2 sts=2
+" vim:ft=vim fdm=marker et ts=4 sw=2 sts=2

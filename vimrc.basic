@@ -65,7 +65,7 @@ set copyindent
 set cindent
 
 set expandtab
-set tabstop=2
+set tabstop=4
 set shiftwidth=2
 set softtabstop=2
 
@@ -85,27 +85,22 @@ endif
 set fileencodings=utf-8,gbk,gb2312,cp936
 set fileformats=unix,dos
 
-if has('autocmd')
-  filetype plugin indent on
+filetype plugin indent on
 
-  " remember the position of the last time view
-  augroup vimrcEx
-    autocmd!
-    autocmd FileType text setlocal textwidth=78
-    autocmd BufReadPost *
-      \ if line("'\"") > 1 && line("'\"") <= line("$") |
-      \	exe "normal! g`\"" |
-      \ endif
-  augroup END
-  autocmd BufNewFile,BufRead *.js,*.json set expandtab tabstop=2 shiftwidth=2 softtabstop=2
-  autocmd BufNewFile,BufRead *.coffee set expandtab tabstop=2 shiftwidth=2 softtabstop=2
-  autocmd BufNewFile,BufRead *.md,*.markdown set expandtab tabstop=4 shiftwidth=4 softtabstop=4
-  autocmd BufNewFile,BufRead *.html,*.tpl set expandtab tabstop=2 shiftwidth=2 softtabstop=2
-  autocmd BufNewFile,BufRead *.py set expandtab tabstop=4 shiftwidth=4 softtabstop=4
+" remember the position of the last time view
+augroup vimrcEx
+  autocmd!
+  autocmd FileType text setlocal textwidth=78
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \	exe "normal! g`\"" |
+    \ endif
+augroup END
 
-  " When vimrc was edited, reload it immediately
-  autocmd! BufWritePost ~/.vim/vimrc source ~/.vim/vimrc
-endif
+source ~/.vim/vimrc.filetype
+
+" When vimrc was edited, reload it immediately
+autocmd! BufWritePost ~/.vim/vimrc source ~/.vim/vimrc
 
 
 
@@ -194,4 +189,4 @@ function! s:convert_file_to_unix_utf8()
   set fileencoding=utf-8
 endfunction
 
-" vim:ft=vim fdm=marker et ts=2 sw=2 sts=2
+" vim:ft=vim fdm=marker et ts=4 sw=2 sts=2

@@ -1,0 +1,10 @@
+"
+" author: jKey Lu <jkeylu@gmail.com>
+"
+
+autocmd BufNewFile,BufRead *.js,*.json,*.coffee set shiftwidth=2 softtabstop=2
+autocmd BufNewFile,BufRead *.html,*.tpl set shiftwidth=2 softtabstop=2
+autocmd BufNewFile,BufRead *.md,*.markdown set shiftwidth=4 softtabstop=4
+autocmd BufNewFile,BufRead *.py set shiftwidth=4 softtabstop=4
+
+" vim:ft=vim fdm=marker et ts=4 sw=2 sts=2
