@@ -16,9 +16,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " My Bundles here:
 "
-" original repos on github
 NeoBundle 'junegunn/seoul256.vim'
-NeoBundle 'jkeylu/mark2666'
 NeoBundle 'jkeylu/vimcdoc'
 
 NeoBundle 'Shougo/vimproc.vim', {
@@ -31,30 +29,9 @@ NeoBundle 'Shougo/vimproc.vim', {
 \   }
 \ }
 
-"NeoBundle 'MarcWeber/vim-addon-mw-utils'
-"NeoBundle 'tomtom/tlib_vim'
-"NeoBundle 'honza/vim-snippets'
-"NeoBundle 'garbas/vim-snipmate'
-
+NeoBundle 'jkeylu/mark2666'
 NeoBundle 'ervandew/supertab'
-NeoBundle 'mattn/emmet-vim'
 NeoBundle 'Shougo/neocomplcache'
-
-if executable('ctags')
-  NeoBundle 'majutsushi/tagbar'
-endif
-
-if executable('git')
-  NeoBundle 'tpope/vim-fugitive'
-endif
-
-NeoBundle 'guileen/vim-node'
-NeoBundle 'hynek/vim-python-pep8-indent'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'wavded/vim-stylus'
 
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
@@ -65,14 +42,64 @@ NeoBundle 'tacahiroy/ctrlp-funky'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'jlanzarotta/bufexplorer'
 NeoBundle 'yonchu/accelerated-smooth-scroll'
+NeoBundle 'ntpeters/vim-better-whitespace'
+
+" Usage: The default mapping to toggle the plugin is <leader>ig
+if v:version > 702
+  NeoBundle 'nathanaelkane/vim-indent-guides'
+endif
+
+if g:vimx#env.exists('snippet')
+  NeoBundle 'MarcWeber/vim-addon-mw-utils'
+  NeoBundle 'tomtom/tlib_vim'
+  NeoBundle 'honza/vim-snippets'
+  NeoBundle 'garbas/vim-snipmate'
+endif
+
+" Language specific
+NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': [ 'html', 'css' ] } }
+NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': [ 'markdown' ] } }
+
+if g:vimx#env.exists('javascript')
+  NeoBundleLazy 'wavded/vim-stylus', { 'autoload': { 'filetypes': [ 'stylus' ] } }
+  NeoBundleLazy 'moll/vim-node', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+  NeoBundleLazy 'guileen/vim-node-dict', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+  NeoBundleLazy 'pangloss/vim-javascript', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+endif
+
+if g:vimx#env.exists('python')
+  NeoBundleLazy 'hynek/vim-python-pep8-indent', { 'autoload': { 'filetypes': [ 'python' ] } }
+endif
+
+if g:vimx#env.exists('coffee')
+  NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': { 'filetypes': [ 'coffee' ] } }
+endif
+
+if g:vimx#env.exists('typescript') && (v:version >= 704)
+  NeoBundleLazy 'leafgarland/typescript-vim', { 'autoload': { 'filetypes': [ 'typescript' ] } }
+  NeoBundleLazy 'Quramy/tsuquyomi', { 'autoload': { 'filetypes': [ 'typescript' ] } }
+endif
+
+if g:vimx#env.exists('c') || g:vimx#env.exists('cpp')
+  NeoBundleLazy 'vim-scripts/a.vim', { 'autoload': { 'filetypes': [ 'c', 'cpp' ] } }
+endif
 
 " vim-scripts repos
-NeoBundle 'a.vim'
-NeoBundle 'DoxygenToolkit.vim'
-NeoBundle 'LargeFile'
+NeoBundle 'vim-scripts/DoxygenToolkit.vim'
+NeoBundle 'vim-scripts/LargeFile'
+
+if executable('ctags')
+  NeoBundle 'majutsushi/tagbar'
+endif
+
+if executable('git')
+  NeoBundle 'tpope/vim-fugitive'
+endif
 
 " No iconv in windows?
-" Download: https://github.com/jkeylu/vim.x/blob/master/windows/libiconv.dll?raw=true
+" Download: http://sourceforge.net/projects/gettext
+" Put "iconv.dll" in the same directory as gvim.exe to be able to edit files
+" in many encodings.
 if has('iconv')
   NeoBundle 'FencView.vim'
 endif

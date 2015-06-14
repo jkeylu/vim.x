@@ -2,9 +2,16 @@
 " author: jKey Lu <jkeylu@gmail.com>
 "
 
-autocmd BufNewFile,BufRead *.js,*.json,*.coffee set shiftwidth=2 softtabstop=2
-autocmd BufNewFile,BufRead *.html,*.tpl set shiftwidth=2 softtabstop=2
-autocmd BufNewFile,BufRead *.md,*.markdown set shiftwidth=4 softtabstop=4
-autocmd BufNewFile,BufRead *.py set shiftwidth=4 softtabstop=4
+" Set filetype
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+autocmd BufNewFile,BufRead *.ts set filetype=typescript
+autocmd BufNewFile,BufRead *.styl set filetype=stylus
+
+
+
+" Tab width
+autocmd FileType markdown set shiftwidth=4 softtabstop=4
+autocmd FileType python set shiftwidth=4 softtabstop=4
 
 " vim:ft=vim fdm=marker et ts=4 sw=2 sts=2
