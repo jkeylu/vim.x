@@ -30,21 +30,46 @@ NeoBundle 'Shougo/vimproc.vim', {
 \ }
 
 NeoBundle 'jkeylu/mark2666'
+
+" Note: Default tab literal is mapped by `<c-v>`
 NeoBundle 'ervandew/supertab'
+
 NeoBundle 'Shougo/neocomplcache'
 
+" Usage:
+" `<leader>cm` minimal comment
+" `<leader>cl` aligned comment
+" `<leader>cu` uncomments the selected line(s)
 NeoBundle 'scrooloose/nerdcommenter'
+
+" Usage: `<leader>nt`
 NeoBundle 'scrooloose/nerdtree'
 
+" Usage: `<c-p>`
 NeoBundle 'kien/ctrlp.vim'
+
+" Navigate and jump to function defs
+"
+" Usage:
+" `<leader>fu`
+" `<leader>fU`
 NeoBundle 'tacahiroy/ctrlp-funky'
 
+" Usage: `<c-n>`
 NeoBundle 'terryma/vim-multiple-cursors'
+
+" Usage: `<leader><leader>`
 NeoBundle 'jlanzarotta/bufexplorer'
+
+" Usage:
+" `<c-d>` scroll down
+" `<c-u>` scroll up
 NeoBundle 'yonchu/accelerated-smooth-scroll'
+
+" Usage: `:StripWhitespace`
 NeoBundle 'ntpeters/vim-better-whitespace'
 
-" Usage: The default mapping to toggle the plugin is <leader>ig
+" Usage: The default mapping to toggle the plugin is `<leader>ig`
 if v:version > 702
   NeoBundle 'nathanaelkane/vim-indent-guides'
 endif
@@ -57,12 +82,23 @@ if g:vimx#env.exists('snippet')
 endif
 
 " Language specific
+
+" Usage: `<c-y>,`
 NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': [ 'html', 'css' ] } }
+
 NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': [ 'markdown' ] } }
 
 if g:vimx#env.exists('javascript')
   NeoBundleLazy 'wavded/vim-stylus', { 'autoload': { 'filetypes': [ 'stylus' ] } }
+
+  " Usage:
+  " Use `gf` inside `require('...')` to jump to source and module files
+  " Use `[I` on any keyword to look for it in the current and required files
+  " Use `:Nedit module_name` to edit the main file of a module
+  " Use `:Nedit module_name/lib/foo` to edit its `lib/foo.js` file
+  " Use `:Nedit .` to edit your Node projects main file
   NeoBundleLazy 'moll/vim-node', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+
   NeoBundleLazy 'guileen/vim-node-dict', { 'autoload': { 'filetypes': [ 'javascript' ] } }
   NeoBundleLazy 'pangloss/vim-javascript', { 'autoload': { 'filetypes': [ 'javascript' ] } }
 endif
@@ -76,11 +112,19 @@ if g:vimx#env.exists('coffee')
 endif
 
 if g:vimx#env.exists('typescript') && (v:version >= 704)
+  " Usage: `:make`
   NeoBundleLazy 'leafgarland/typescript-vim', { 'autoload': { 'filetypes': [ 'typescript' ] } }
+
+  " Usage:
+  " `<c-]>` Nav to definition
+  " `<c-t>` Move the cursor to the location where the last `<c-]>` was typed
+  " `<c-^>a` Show references
+  " `:TsuquyomiRenameSymbol`
   NeoBundleLazy 'Quramy/tsuquyomi', { 'autoload': { 'filetypes': [ 'typescript' ] } }
 endif
 
 if g:vimx#env.exists('c') || g:vimx#env.exists('cpp')
+  " Usage: `:A`
   NeoBundleLazy 'vim-scripts/a.vim', { 'autoload': { 'filetypes': [ 'c', 'cpp' ] } }
 endif
 
@@ -89,10 +133,16 @@ NeoBundle 'vim-scripts/DoxygenToolkit.vim'
 NeoBundle 'vim-scripts/LargeFile'
 
 if executable('ctags')
+  " Usage: `<leader>tl`
   NeoBundle 'majutsushi/tagbar'
 endif
 
 if executable('git')
+  " Usage:
+  " `:Gsplit`, `:Gvsplit`
+  " `:Gdiff`
+  " `:Gstatus`. Press `-` to add/reset a file's changes, or `p` to add/reset --patch
+  " `:Gcommit`
   NeoBundle 'tpope/vim-fugitive'
 endif
 
@@ -101,7 +151,7 @@ endif
 " Put "iconv.dll" in the same directory as gvim.exe to be able to edit files
 " in many encodings.
 if has('iconv')
-  NeoBundle 'FencView.vim'
+  NeoBundle 'vim-scripts/FencView.vim'
 endif
 
 " Always load auto-pairs at last.

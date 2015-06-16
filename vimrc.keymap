@@ -40,20 +40,4 @@ nmap <silent> <leader>ee :e ~/.vim/vimrc<CR>
 
 nnoremap <C-g>ff :call<SID>convert_file_to_unix_utf8()<CR>
 
-" bufexplorer
-nmap <leader><leader> <leader>be
-
-" nerdtree
-nnoremap <leader>nt :NERDTree<cr>
-
-" tagbar
-if executable('ctags')
-  nnoremap <leader>tl :TagbarToggle<cr>
-endif
-
-" ctrlp-funky
-nnoremap <leader>fu :CtrlPFunky<CR>
-" narrow the list down with a word under cursor
-nnoremap <leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<CR>
-
 " vim:ft=vim fdm=marker et ts=4 sw=2 sts=2

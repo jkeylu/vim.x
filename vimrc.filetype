@@ -13,5 +13,6 @@ autocmd BufNewFile,BufRead *.styl set filetype=stylus
 " Tab width
 autocmd FileType markdown set shiftwidth=4 softtabstop=4
 autocmd FileType python set shiftwidth=4 softtabstop=4
+autocmd FileType typescript set shiftwidth=4 softtabstop=4
 
 " vim:ft=vim fdm=marker et ts=4 sw=2 sts=2
