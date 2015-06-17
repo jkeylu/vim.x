@@ -26,14 +26,19 @@ let g:neocomplcache_enable_underbar_completion = 1
 "
 let NERDTreeChDirMode = 2
 let NERDTreeWinSize = 25
-let NERDTreeQuitOnOpen = 1
+let NERDTreeQuitOnOpen = !g:vimx#env.exists('ide')
 let NERDTreeShowLineNumbers = 1
 let NERDTreeDirArrows = 0
-nnoremap <leader>nt :NERDTree<cr>
+nnoremap <leader>nt :NERDTree .<cr>
 
 
 " CtrlP {{{1
 "
+let g:ctrlp_regexp = 1
+let g:ctrlp_custom_ignore = {
+\   'dir': '\v[\/]\.(git|hg|svn)$',
+\   'file': '\v\.(exe|so|dll)$'
+\ }
 let g:ctrlp_extensions = ['funky']
 
 
@@ -110,6 +115,13 @@ if g:vimx#env.exists('typescript') && (v:version >= 704)
   autocmd QuickFixCmdPost l* nested lwindow
 endif
 
+
+" vim-startify
+"
+if g:vimx#env.exists('ide')
+  let g:startify_session_dir = '~/.cache/vimsession'
+  let g:startify_session_persistence = 1
+endif
 
 " auto-pairs {{{1
 "

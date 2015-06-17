@@ -45,8 +45,13 @@ NeoBundle 'scrooloose/nerdcommenter'
 " Usage: `<leader>nt`
 NeoBundle 'scrooloose/nerdtree'
 
-" Usage: `<c-p>`
-NeoBundle 'kien/ctrlp.vim'
+" Active fork of 'kien/ctrlp.vim'
+" Usage:
+" `<c-p>`
+" `<c-r>` switch to regexp mode
+" `<c-d>` toggled on/off searching by filename
+" `<c-z>` mark/unmark multiple files and `<c-o>` to open then
+NeoBundle 'ctrlpvim/ctrlp.vim'
 
 " Navigate and jump to function defs
 "
@@ -143,19 +148,28 @@ if executable('git')
   " `:Gdiff`
   " `:Gstatus`. Press `-` to add/reset a file's changes, or `p` to add/reset --patch
   " `:Gcommit`
+  " `:Glog`
   NeoBundle 'tpope/vim-fugitive'
 endif
 
 " No iconv in windows?
 " Download: http://sourceforge.net/projects/gettext
-" Put "iconv.dll" in the same directory as gvim.exe to be able to edit files
-" in many encodings.
-" Usage:
-" `:FencView`
-" `:FencAutoDetect`
-" `:FencManualEncoding utf-8`
+" Put "iconv.dll" in the same directory as gvim.exe to be able to edit files in many encodings.
 if has('iconv')
+  " Usage:
+  " `:FencView`
+  " `:FencAutoDetect`
+  " `:FencManualEncoding utf-8`
   NeoBundle 'mbbill/fencview'
+endif
+
+if g:vimx#env.exists('ide')
+  " Usage:
+  " `:SLoad`
+  " `:SSave`
+  " `:SDelete`
+  " `Startify`
+  NeoBundle 'mhinz/vim-startify'
 endif
 
 " Always load auto-pairs at last.
