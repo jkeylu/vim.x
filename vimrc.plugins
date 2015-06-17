@@ -52,7 +52,7 @@ let g:multi_cursor_quit_key = '<Tab>'
 " FencView.vim {{{1
 "
 let g:fencview_autodetect = 1
-let g:fencview_auto_patterns = '*.cnx,*.txt,*.html,*.php,*.cpp,*.h,*.c,*.css,*.java{|\=}'
+let g:fencview_auto_patterns = '*.cnx,*.txt,*.html,*.php,*.cpp,*.h,*.c,*.css,*.js,*.ts,*.py,*.sh,*.java{|\=}'
 let g:fencview_checklines = 10
 
 

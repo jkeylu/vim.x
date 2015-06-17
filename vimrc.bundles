@@ -150,8 +150,12 @@ endif
 " Download: http://sourceforge.net/projects/gettext
 " Put "iconv.dll" in the same directory as gvim.exe to be able to edit files
 " in many encodings.
+" Usage:
+" `:FencView`
+" `:FencAutoDetect`
+" `:FencManualEncoding utf-8`
 if has('iconv')
-  NeoBundle 'vim-scripts/FencView.vim'
+  NeoBundle 'mbbill/fencview'
 endif
 
 " Always load auto-pairs at last.
