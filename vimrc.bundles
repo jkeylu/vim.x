@@ -34,7 +34,15 @@ NeoBundle 'jkeylu/mark2666'
 " Note: Default tab literal is mapped by `<c-v>`
 NeoBundle 'ervandew/supertab'
 
-NeoBundle 'Shougo/neocomplcache'
+if has('lua')
+  " for windows [download Lua](http://lua-users.org/wiki/LuaBinaries) and put
+  " the lua52.dll file in the same directory as gvim.exe
+  " for Mac OSX `brew install vim --with-lua`
+  NeoBundle 'Shougo/neocomplete.vim'
+else
+  NeoBundle 'Shougo/neocomplcache.vim'
+endif
+
 
 " Usage:
 " `<leader>cm` minimal comment
