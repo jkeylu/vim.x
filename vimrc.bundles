@@ -96,6 +96,11 @@ endif
 
 " Language specific
 
+" Syntax checking hacks for vim
+if g:vimx#env.exists('syntastic')
+  NeoBundle 'scrooloose/syntastic'
+endif
+
 " Usage: `<c-y>,`
 NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': [ 'html', 'css' ] } }
 
