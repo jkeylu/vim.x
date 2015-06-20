@@ -185,6 +185,13 @@ if g:vimx#env.exists('ide')
   NeoBundle 'mhinz/vim-startify'
 endif
 
+" Usage:
+" `\w` word motion
+" `\b`
+" `\e`
+" `\f` looking for
+NeoBundle 'Lokaltog/vim-easymotion'
+
 " Always load auto-pairs at last.
 NeoBundle 'jiangmiao/auto-pairs'
 
