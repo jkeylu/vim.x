@@ -160,6 +160,16 @@ if executable('ctags')
 endif
 
 if executable('git')
+  if has('signs')
+    " Usage:
+    " `]c` jump to next hunk (change)
+    " `[c` jump to previous hunk (change)
+    " `<leader>hs` stage the hunk
+    " `<leader>hr` revert it
+    " `<leader>hp` preview a hunk's changes
+    NeoBundle 'airblade/vim-gitgutter'
+  endif
+
   " Usage:
   " `:Gsplit`, `:Gvsplit`
   " `:Gdiff`
@@ -167,6 +177,10 @@ if executable('git')
   " `:Gcommit`
   " `:Glog`
   NeoBundle 'tpope/vim-fugitive'
+
+  " Usage:
+  " `:Gitv`
+  NeoBundle 'gregsexton/gitv'
 endif
 
 " No iconv in windows?
