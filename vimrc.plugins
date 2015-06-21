@@ -34,10 +34,13 @@ endif
 "
 let NERDTreeChDirMode = 2
 let NERDTreeWinSize = 25
-let NERDTreeQuitOnOpen = !g:vimx#env.exists('ide')
+let NERDTreeQuitOnOpen = 1
 let NERDTreeShowLineNumbers = 1
 let NERDTreeDirArrows = 0
-nnoremap <leader>nt :NERDTree .<cr>
+nmap <leader>nt :NERDTree .<CR>
+nmap <leader>nf :NERDTreeFocus<CR>
+nmap <leader>nc :NERDTreeClose<CR>
+nmap <leader>np :let NERDTreeQuitOnOpen = !NERDTreeQuitOnOpen<CR>
 
 
 " CtrlP {{{1

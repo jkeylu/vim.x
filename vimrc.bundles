@@ -50,7 +50,11 @@ endif
 " `<leader>cu` uncomments the selected line(s)
 NeoBundle 'scrooloose/nerdcommenter'
 
-" Usage: `<leader>nt`
+" Usage:
+" `<leader>nt`
+" `<leader>nf`
+" `<leader>nc`
+" `<leader>np`
 NeoBundle 'scrooloose/nerdtree'
 
 " Active fork of 'kien/ctrlp.vim'
