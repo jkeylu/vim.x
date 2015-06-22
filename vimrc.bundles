@@ -98,6 +98,19 @@ if g:vimx#env.exists('snippet')
   NeoBundle 'garbas/vim-snipmate'
 endif
 
+" Usage:
+" `:hlep signature`
+" `mx` Toggle mark 'x' and display it in the leftmost column
+" `m.` If no mark on line, place the next available mark. Otherwise, remove (first) existing mark.
+" `m<space>` Delete all marks from the current buffer
+" `]``, `[`` Jump to next/prev mark
+" 'm/' Open location list and display marks form current buffer
+" `m[0-9]` Toggle the correspanding marker !@#$%^&*()
+" `]-`, `[-` Jump to next/prev line having a marker of the same type
+" `m?` Open location list and display markers from current buffer
+" `m<BS>` Remove all markers
+NeoBundle 'kshenoy/vim-signature'
+
 " Language specific
 
 " Syntax checking hacks for vim

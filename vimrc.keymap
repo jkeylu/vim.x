@@ -36,7 +36,7 @@ endif
 " Fast reload vimrc
 nmap <silent> <leader>ss :source ~/.vim/vimrc<CR>
 " Fast edit vimrc
-nmap <silent> <leader>ee :e ~/.vim/vimrc<CR>
+nmap <silent> <leader>ee :e ~/.vim/vimrc.bundles<CR>
 
 nnoremap <C-g>ff :call<SID>convert_file_to_unix_utf8()<CR>
 
