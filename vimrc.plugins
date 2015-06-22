@@ -9,7 +9,16 @@ nmap <leader><leader> <leader>be
 
 " supertab {{{1
 "
+let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabMappingTabLiteral='<c-v>'
+
+autocmd FileType typescript
+  \ let b:SuperTabCompletionContexts
+  \   = [ 's:TypescriptContext' ] + g:SuperTabCompletionContexts |
+  \ let b:SuperTabContextTextMemberPatterns = [ '\.' ]
+function! s:TypescriptContext()
+  return "\<c-x>\<c-o>"
+endfunction
 
 
 " neocomplcache.vim | neocomplete.vim {{{1
