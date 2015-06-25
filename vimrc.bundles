@@ -10,46 +10,94 @@ endif
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
 
+" {{{ neobundle.vim
 " let NeoBundle manage NeoBundle
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
+" }}}
 
-" My Bundles here:
-"
+" {{{ seoul256.vim
 NeoBundle 'junegunn/seoul256.vim'
+" }}}
+
+" {{{ vimcdoc
 NeoBundle 'jkeylu/vimcdoc'
+" }}}
 
-NeoBundle 'Shougo/vimproc.vim', {
-\   'build': {
-\     'windows': '"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat" && nmake -f make_msvc.mak nodebug=1 "SDK_INCLUDE_DIR=C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include"',
-\     'cygwin': 'make -f make_cygwin.mak',
-\     'mac': 'make -f make_mac.mak',
-\     'linux': 'make',
-\     'unix': 'gmake'
-\   }
-\ }
+" {{{ vimproc.vim
+NeoBundle 'Shougo/vimproc.vim',
+  \ {
+  \   'build': {
+  \     'windows': '"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat" && nmake -f make_msvc.mak nodebug=1 "SDK_INCLUDE_DIR=C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include"',
+  \     'cygwin': 'make -f make_cygwin.mak',
+  \     'mac': 'make -f make_mac.mak',
+  \     'linux': 'make',
+  \     'unix': 'gmake'
+  \   }
+  \ }
+" }}}
 
+" {{{ mark2666
 NeoBundle 'jkeylu/mark2666'
 
+if has('gui_running')
+  let g:mwDefaultHighlightingPalette = 'extended'
+  let g:mwDefaultHighlightingNum = 18
+endif
+" }}}
+
+" {{{ supertab
 " Note: Default tab literal is mapped by `<c-v>`
 NeoBundle 'ervandew/supertab'
 
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabMappingTabLiteral='<c-v>'
+
+autocmd FileType typescript
+  \ let b:SuperTabCompletionContexts
+  \   = [ 's:TypescriptContext' ] + g:SuperTabCompletionContexts |
+  \ let b:SuperTabContextTextMemberPatterns = [ '\.' ]
+function! s:TypescriptContext()
+  return "\<c-x>\<c-o>"
+endfunction
+" }}}
+
 if has('lua')
+  " {{{ neocomplete.vim
   " for windows [download Lua](http://lua-users.org/wiki/LuaBinaries) and put
   " the lua52.dll file in the same directory as gvim.exe
   " for Mac OSX `brew install vim --with-lua`
   NeoBundle 'Shougo/neocomplete.vim'
+
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#auto_completion_start_length = 4
+  let g:neocomplete#manual_completion_start_length = 4
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#enable_camel_case = 1
+  " }}}
 else
+  " {{{ neocomplcache.vim
   NeoBundle 'Shougo/neocomplcache.vim'
+
+  let g:neocomplcache_enable_at_startup = 1
+  let g:neocomplcache_auto_completion_start_length = 4
+  let g:neocomplcache_manual_completion_start_length = 4
+  let g:neocomplcache_enable_smart_case = 1
+  let g:neocomplcache_enable_camel_case_completion = 1
+  let g:neocomplcache_enable_underbar_completion = 1
+  " }}}
 endif
 
 
+" {{{ nerdcommenter
 " Usage:
 " `<leader>cm` minimal comment
 " `<leader>cl` aligned comment
 " `<leader>cu` uncomments the selected line(s)
 NeoBundle 'scrooloose/nerdcommenter'
+" }}}
 
+" {{{ nerdtree
 " Usage:
 " `<leader>nt`
 " `<leader>nf`
@@ -57,6 +105,18 @@ NeoBundle 'scrooloose/nerdcommenter'
 " `<leader>np`
 NeoBundle 'scrooloose/nerdtree'
 
+let NERDTreeChDirMode = 2
+let NERDTreeWinSize = 25
+let NERDTreeQuitOnOpen = 1
+let NERDTreeShowLineNumbers = 1
+let NERDTreeDirArrows = 0
+nmap <leader>nt :NERDTree .<CR>
+nmap <leader>nf :NERDTreeFocus<CR>
+nmap <leader>nc :NERDTreeClose<CR>
+nmap <leader>np :let NERDTreeQuitOnOpen = !NERDTreeQuitOnOpen<CR>
+" }}}
+
+" {{{ ctrlp.vim
 " Active fork of 'kien/ctrlp.vim'
 " Usage:
 " `<c-p>`
@@ -65,30 +125,60 @@ NeoBundle 'scrooloose/nerdtree'
 " `<c-z>` mark/unmark multiple files and `<c-o>` to open then
 NeoBundle 'ctrlpvim/ctrlp.vim'
 
+let g:ctrlp_regexp = 1
+let g:ctrlp_custom_ignore = {
+  \   'dir': '\v[\/]\.(git|hg|svn)$',
+  \   'file': '\v\.(exe|so|dll)$'
+  \ }
+let g:ctrlp_extensions = ['funky']
+" }}}
+
+" {{{ctrlp-funky
 " Navigate and jump to function defs
-"
 " Usage:
 " `<leader>fu`
 " `<leader>fU`
 NeoBundle 'tacahiroy/ctrlp-funky'
 
+nnoremap <leader>fu :CtrlPFunky<CR>
+" narrow the list down with a word under cursor
+nnoremap <leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<CR>
+" }}}
+
+" {{{ vim-multiple-cursors
 " Usage: `<c-n>`
 NeoBundle 'terryma/vim-multiple-cursors'
 
+let g:multi_cursor_quit_key = '<Tab>'
+" }}}
+
+" {{{ bufexplorer
 " Usage: `<leader><leader>`
 NeoBundle 'jlanzarotta/bufexplorer'
 
+nmap <leader><leader> <leader>be
+" }}}
+
+" {{{ accelerated-smooth-scroll
 " Usage:
 " `<c-d>` scroll down
 " `<c-u>` scroll up
 NeoBundle 'yonchu/accelerated-smooth-scroll'
+" }}}
 
+" {{{ vim-better-whitespace
 " Usage: `:StripWhitespace`
 NeoBundle 'ntpeters/vim-better-whitespace'
+" }}}
 
-" Usage: The default mapping to toggle the plugin is `<leader>ig`
 if v:version > 702
+  " {{{ vim-indent-guides
+  " Usage: The default mapping to toggle the plugin is `<leader>ig`
   NeoBundle 'nathanaelkane/vim-indent-guides'
+
+  let g:indent_guides_guide_size = 1
+  let g:indent_guides_start_level = 2
+  " }}}
 endif
 
 if g:vimx#env.exists('snippet')
@@ -98,6 +188,7 @@ if g:vimx#env.exists('snippet')
   NeoBundle 'garbas/vim-snipmate'
 endif
 
+" {{{ vim-signature
 " Usage:
 " `:hlep signature`
 " `mx` Toggle mark 'x' and display it in the leftmost column
@@ -110,22 +201,41 @@ endif
 " `m?` Open location list and display markers from current buffer
 " `m<BS>` Remove all markers
 NeoBundle 'kshenoy/vim-signature'
+" }}}
 
 " Language specific
 
+" {{{ syntastic
 " Syntax checking hacks for vim
 if g:vimx#env.exists('syntastic')
   NeoBundle 'scrooloose/syntastic'
-endif
 
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+endif
+" }}}
+
+" {{{ emmet-vim
 " Usage: `<c-y>,`
 NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': [ 'html', 'css' ] } }
+" }}}
 
+" {{{ vim-markdown
 NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': [ 'markdown' ] } }
+" }}}
 
 if g:vimx#env.exists('javascript')
+  " {{{ vim-stylus
   NeoBundleLazy 'wavded/vim-stylus', { 'autoload': { 'filetypes': [ 'stylus' ] } }
+  " }}}
 
+  " {{{ vim-node
   " Usage:
   " Use `gf` inside `require('...')` to jump to source and module files
   " Use `[I` on any keyword to look for it in the current and required files
@@ -133,47 +243,84 @@ if g:vimx#env.exists('javascript')
   " Use `:Nedit module_name/lib/foo` to edit its `lib/foo.js` file
   " Use `:Nedit .` to edit your Node projects main file
   NeoBundleLazy 'moll/vim-node', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+  " }}}
 
+  " {{{ vim-node-dict
   NeoBundleLazy 'guileen/vim-node-dict', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+
+  autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node-dict/dict/node.dict
+  " }}}
+
+  " {{{ vim-javascript
   NeoBundleLazy 'pangloss/vim-javascript', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+
+  let g:html_indent_inctags = 'html,body,head,tbody'
+  let g:html_indent_script1 = 'inc'
+  let g:html_indent_style1 = 'inc'
+  " }}}
 endif
 
 if g:vimx#env.exists('python')
+  " {{{ vim-python-pep8-indent
   NeoBundleLazy 'hynek/vim-python-pep8-indent', { 'autoload': { 'filetypes': [ 'python' ] } }
+  " }}}
 endif
 
 if g:vimx#env.exists('coffee')
+  " {{{ vim-coffee-script
   NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': { 'filetypes': [ 'coffee' ] } }
+  " }}}
 endif
 
 if g:vimx#env.exists('typescript') && (v:version >= 704)
+  " {{{ typescript-vim
   " Usage: `:make`
   NeoBundleLazy 'leafgarland/typescript-vim', { 'autoload': { 'filetypes': [ 'typescript' ] } }
+  " }}}
 
+  " {{{ tsuquyomi
   " Usage:
   " `<c-]>` Nav to definition
   " `<c-t>` Move the cursor to the location where the last `<c-]>` was typed
   " `<c-^>a` Show references
   " `:TsuquyomiRenameSymbol`
   NeoBundleLazy 'Quramy/tsuquyomi', { 'autoload': { 'filetypes': [ 'typescript' ] } }
+  " }}}
 endif
 
 if g:vimx#env.exists('c') || g:vimx#env.exists('cpp')
+  " {{{ a.vim
   " Usage: `:A`
   NeoBundleLazy 'vim-scripts/a.vim', { 'autoload': { 'filetypes': [ 'c', 'cpp' ] } }
+  " }}}
 endif
 
-" vim-scripts repos
+" {{{ DoxygenToolkit.vim
 NeoBundle 'vim-scripts/DoxygenToolkit.vim'
+" }}}
+
+" {{{ LargeFile
 NeoBundle 'vim-scripts/LargeFile'
 
+let g:LargeFile = 100
+" }}}
+
 if executable('ctags')
+  " {{{ tagbar
   " Usage: `<leader>tl`
   NeoBundle 'majutsushi/tagbar'
+
+  let g:tagbar_width = 40
+  let g:tagbar_autoclose = 1
+  let g:tagbar_autofocus = 1
+  let g:tagbar_show_linenumbers = 2
+  nnoremap <leader>tl :TagbarToggle<cr>
+  " }}}
 endif
 
 if executable('git')
   if has('signs')
+    " {{{ vim-gitgutter
     " Usage:
     " `]c` jump to next hunk (change)
     " `[c` jump to previous hunk (change)
@@ -181,8 +328,10 @@ if executable('git')
     " `<leader>hr` revert it
     " `<leader>hp` preview a hunk's changes
     NeoBundle 'airblade/vim-gitgutter'
+    " }}}
   endif
 
+  " {{{ vim-fugitive
   " Usage:
   " `:Gsplit`, `:Gvsplit`
   " `:Gdiff`
@@ -190,32 +339,47 @@ if executable('git')
   " `:Gcommit`
   " `:Glog`
   NeoBundle 'tpope/vim-fugitive'
+  " }}}
 
+  " {{{ gitv
   " Usage:
   " `:Gitv`
   NeoBundle 'gregsexton/gitv'
+  " }}}
 endif
 
 " No iconv in windows?
 " Download: http://sourceforge.net/projects/gettext
 " Put "iconv.dll" in the same directory as gvim.exe to be able to edit files in many encodings.
 if has('iconv')
+  " {{{ fencview
   " Usage:
   " `:FencView`
   " `:FencAutoDetect`
   " `:FencManualEncoding utf-8`
   NeoBundle 'mbbill/fencview'
+
+  let g:fencview_autodetect = 1
+  let g:fencview_auto_patterns = '*.cnx,*.txt,*.html,*.php,*.cpp,*.h,*.c,*.css,*.js,*.ts,*.py,*.sh,*.java{|\=}'
+  let g:fencview_checklines = 10
+  " }}}
 endif
 
 if g:vimx#env.exists('ide')
+  " {{{ vim-startify
   " Usage:
   " `:SLoad`
   " `:SSave`
   " `:SDelete`
   " `Startify`
   NeoBundle 'mhinz/vim-startify'
+
+  let g:startify_session_dir = '~/.cache/vimsession'
+  let g:startify_session_persistence = 1
+  " }}}
 endif
 
+" {{{ vim-easymotion
 " Usage:
 " `\w` word motion
 " `\b`
@@ -223,8 +387,20 @@ endif
 " `\f` looking for
 NeoBundle 'Lokaltog/vim-easymotion'
 
+let g:EasyMotion_smartcase = 1
+map \ <Plug>(easymotion-prefix)
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
+" }}}
+
+" {{{ auto-pairs
 " Always load auto-pairs at last.
 NeoBundle 'jiangmiao/auto-pairs'
+
+let g:AutoPairsMapCR = 0
+" }}}
 
 call neobundle#end()
 

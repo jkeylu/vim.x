@@ -36,8 +36,9 @@ endif
 " Read first line or last line to exec modeline
 set modelines=1
 
-let mapleader = ','
 
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost l* nested lwindow
 
 
 " syntax {{{1

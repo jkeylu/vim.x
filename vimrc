@@ -9,61 +9,43 @@ if &compatible
   set nocompatible " be iMproved
 endif
 
+let mapleader = ','
 
 
-" Check Platform {{{1
+" Check Platform
 "
-
 source ~/.vim/vimrc.platform
 
 
-" Load default env {{{1
+" Load default env
 "
-
 source ~/.vim/vimrc.env
 
 
-
-" Before {{{1
+" Before
 "
-
 if filereadable(expand('~/.vim/vimrc.before'))
   source ~/.vim/vimrc.before
 endif
 
 
-
-" NeoBundle Settings {{{1
+" NeoBundle Settings
 "
-
 source ~/.vim/vimrc.bundles
 
 
-
-" Vim Settings {{{1
+" Vim Settings
 "
-
 source ~/.vim/vimrc.basic
 
 
-
-" Plugins Settings {{{1
+" Map Key
 "
-
-source ~/.vim/vimrc.plugins
-
-
-
-" Map Key {{{1
-"
-
 source ~/.vim/vimrc.keymap
 
 
-
-" After {{{1
+" After
 "
-
 if filereadable(expand('~/.vim/vimrc.after'))
   source ~/.vim/vimrc.after
 endif
