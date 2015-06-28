@@ -18,6 +18,14 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " {{{ seoul256.vim
 NeoBundle 'junegunn/seoul256.vim'
+
+let bundle = neobundle#get('seoul256.vim')
+function! bundle.hooks.on_post_source(bundle)
+  if &t_Co >= 256 || has('gui_running')
+    let g:seoul256_background = 234
+    silent! colorscheme seoul256
+  endif
+endfunction
 " }}}
 
 " {{{ vimcdoc
@@ -51,19 +59,19 @@ endif
 NeoBundle 'ervandew/supertab'
 
 let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabMappingTabLiteral='<c-v>'
+let g:SuperTabMappingTabLiteral='<C-v>'
 
 autocmd FileType typescript
   \ let b:SuperTabCompletionContexts
-  \   = [ 's:TypescriptContext' ] + g:SuperTabCompletionContexts |
+  \   = [ 's:typescriptContext' ] + g:SuperTabCompletionContexts |
   \ let b:SuperTabContextTextMemberPatterns = [ '\.' ]
-function! s:TypescriptContext()
-  return "\<c-x>\<c-o>"
+function! s:typescriptContext()
+  return "\<C-x>\<C-o>"
 endfunction
 " }}}
 
+" {{{ neocomplete | neocomplcache
 if has('lua')
-  " {{{ neocomplete.vim
   " for windows [download Lua](http://lua-users.org/wiki/LuaBinaries) and put
   " the lua52.dll file in the same directory as gvim.exe
   " for Mac OSX `brew install vim --with-lua`
@@ -74,9 +82,7 @@ if has('lua')
   let g:neocomplete#manual_completion_start_length = 4
   let g:neocomplete#enable_smart_case = 1
   let g:neocomplete#enable_camel_case = 1
-  " }}}
 else
-  " {{{ neocomplcache.vim
   NeoBundle 'Shougo/neocomplcache.vim'
 
   let g:neocomplcache_enable_at_startup = 1
@@ -85,9 +91,8 @@ else
   let g:neocomplcache_enable_smart_case = 1
   let g:neocomplcache_enable_camel_case_completion = 1
   let g:neocomplcache_enable_underbar_completion = 1
-  " }}}
 endif
-
+" }}}
 
 " {{{ nerdcommenter
 " Usage:
@@ -97,66 +102,136 @@ endif
 NeoBundle 'scrooloose/nerdcommenter'
 " }}}
 
-" {{{ nerdtree
-" Usage:
-" `<leader>nt`
-" `<leader>nf`
-" `<leader>nc`
-" `<leader>np`
-NeoBundle 'scrooloose/nerdtree'
+if g:vimx#env.exists('no-unite')
+  " {{{ bufexplorer
+  " Usage: `<leader><leader>`
+  NeoBundle 'jlanzarotta/bufexplorer'
 
-let NERDTreeChDirMode = 2
-let NERDTreeWinSize = 25
-let NERDTreeQuitOnOpen = 1
-let NERDTreeShowLineNumbers = 1
-let NERDTreeDirArrows = 0
-nmap <leader>nt :NERDTree .<CR>
-nmap <leader>nf :NERDTreeFocus<CR>
-nmap <leader>nc :NERDTreeClose<CR>
-nmap <leader>np :let NERDTreeQuitOnOpen = !NERDTreeQuitOnOpen<CR>
-" }}}
+  nmap <leader><leader> <leader>be
+  " }}}
 
-" {{{ ctrlp.vim
-" Active fork of 'kien/ctrlp.vim'
-" Usage:
-" `<c-p>`
-" `<c-r>` switch to regexp mode
-" `<c-d>` toggled on/off searching by filename
-" `<c-z>` mark/unmark multiple files and `<c-o>` to open then
-NeoBundle 'ctrlpvim/ctrlp.vim'
+  " {{{ ctrlp.vim
+  " Active fork of 'kien/ctrlp.vim'
+  " Usage:
+  " `<c-p>`
+  " `<c-r>` switch to regexp mode
+  " `<c-d>` toggled on/off searching by filename
+  " `<c-z>` mark/unmark multiple files and `<c-o>` to open then
+  NeoBundle 'ctrlpvim/ctrlp.vim'
 
-let g:ctrlp_regexp = 1
-let g:ctrlp_custom_ignore = {
-  \   'dir': '\v[\/]\.(git|hg|svn)$',
-  \   'file': '\v\.(exe|so|dll)$'
-  \ }
-let g:ctrlp_extensions = ['funky']
-" }}}
+  let g:ctrlp_regexp = 1
+  let g:ctrlp_custom_ignore = {
+    \   'dir': '\v[\/]\.(git|hg|svn)$',
+    \   'file': '\v\.(exe|so|dll)$'
+    \ }
+  let g:ctrlp_extensions = ['funky']
+  " }}}
 
-" {{{ctrlp-funky
-" Navigate and jump to function defs
-" Usage:
-" `<leader>fu`
-" `<leader>fU`
-NeoBundle 'tacahiroy/ctrlp-funky'
+  " {{{ctrlp-funky
+  " Navigate and jump to function defs
+  " Usage:
+  " `<leader>fu`
+  " `<leader>fU`
+  NeoBundle 'tacahiroy/ctrlp-funky'
 
-nnoremap <leader>fu :CtrlPFunky<CR>
-" narrow the list down with a word under cursor
-nnoremap <leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<CR>
-" }}}
+  nnoremap <leader>fu :CtrlPFunky<CR>
+  " narrow the list down with a word under cursor
+  nnoremap <leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<CR>
+  " }}}
+
+  " {{{ nerdtree
+  " Usage:
+  " `<leader>nt`
+  " `<leader>nf`
+  " `<leader>nc`
+  " `<leader>np`
+  NeoBundle 'scrooloose/nerdtree', { 'depends': 'dbakker/vim-projectroot' }
+
+  let NERDTreeChDirMode = 2
+  let NERDTreeWinSize = 25
+  "let NERDTreeQuitOnOpen = 1
+  let NERDTreeShowLineNumbers = 1
+  let NERDTreeDirArrows = 0
+
+  nmap <leader>nt :ProjectRootExe NERDTree<CR>
+  nmap <leader>nf :NERDTreeFocus<CR>
+  nmap <leader>nc :NERDTreeClose<CR>
+  nmap <leader>np :let NERDTreeQuitOnOpen = !NERDTreeQuitOnOpen<CR>
+  " }}}
+else
+  " {{{ unite.vim
+  NeoBundle 'Shougo/unite.vim'
+
+  " just like bufexplorer
+  nmap <leader><leader> :Unite -no-start-insert buffer bookmark<CR>
+  " just like ctrlp.vim
+  nnoremap <C-p> :<C-u>UniteWithProjectDir file_rec/async<CR>
+
+  autocmd Filetype unite call s:uniteSettings()
+  function! s:uniteSettings()
+    imap <buffer> jj <Plug>(unite_insert_leave)
+
+    imap <buffer> <Esc> <Plug>(unite_exit)
+    nmap <buffer> <Esc> <Plug>(unite_exit)
+
+    imap <buffer> <Tab> <Plug>(unite_select_next_line)
+    imap <buffer> ' <Plug>(unite_quick_match_default_action)
+    nmap <buffer> ' <Plug>(unite_quick_match_default_action)
+
+    imap <buffer> <C-j> <Plug>(unite_select_next_line)
+    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+  endfunction
+
+  let bundle = neobundle#get('unite.vim')
+  function! bundle.hooks.on_post_source(bundle)
+    call unite#custom#profile('default', 'context',
+      \ {
+      \   'start_insert': 1,
+      \   'winheight': 10,
+      \   'prompt': '> ',
+      \   'direction': 'botright'
+      \ })
+
+    call unite#custom#source('file_rec/async', 'ignore_pattern',
+      \ join([
+      \   '\.git/',
+      \   'node_modules/',
+      \   'bower_components/'
+      \ ], '\|'))
+
+    call unite#custom#source('file_rec/async', 'matchers',
+      \ [
+      \   'matcher_context',
+      \   'matcher_hide_current_file'
+      \ ])
+
+    call unite#custom#source('file_rec/async', 'sorters',
+      \ [
+      \   'sorter_length'
+      \ ])
+  endfunction
+  " }}}
+
+  " {{{ vimfiler.vim
+  " Usage:
+  " `<leader>nt`
+  " in vimfiler `&` switch to project directory
+  NeoBundle 'Shougo/vimfiler.vim'
+
+  nmap <leader>nt :VimFiler -explorer -parent -status -auto-cd -auto-expand -find<CR>
+
+  autocmd Filetype vimfiler call s:vimfilerSettings()
+  function! s:vimfilerSettings()
+    nmap <buffer> q <Plug>(vimfiler_close)
+  endfunction
+  " }}}
+endif
 
 " {{{ vim-multiple-cursors
 " Usage: `<c-n>`
 NeoBundle 'terryma/vim-multiple-cursors'
 
 let g:multi_cursor_quit_key = '<Tab>'
-" }}}
-
-" {{{ bufexplorer
-" Usage: `<leader><leader>`
-NeoBundle 'jlanzarotta/bufexplorer'
-
-nmap <leader><leader> <leader>be
 " }}}
 
 " {{{ accelerated-smooth-scroll
@@ -182,10 +257,14 @@ if v:version > 702
 endif
 
 if g:vimx#env.exists('snippet')
-  NeoBundle 'MarcWeber/vim-addon-mw-utils'
-  NeoBundle 'tomtom/tlib_vim'
+  NeoBundle 'garbas/vim-snipmate',
+    \ {
+    \   'depends': [
+    \     'MarcWeber/vim-addon-mw-utils',
+    \     'tomtom/tlib_vim'
+    \   ]
+    \ }
   NeoBundle 'honza/vim-snippets'
-  NeoBundle 'garbas/vim-snipmate'
 endif
 
 " {{{ vim-signature

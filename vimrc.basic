@@ -50,11 +50,6 @@ endif
 
 set background=dark
 
-if &t_Co >= 256 || has('gui_running')
-  let g:seoul256_background = 234
-  silent! colorscheme seoul256
-endif
-
 
 
 " Format {{{1
@@ -74,9 +69,9 @@ set backspace=indent,eol,start
 
 set foldmethod=marker
 
-if exists('&autochdir')
-  set autochdir
-endif
+"if exists('&autochdir')
+"  set autochdir
+"endif
 
 
 
