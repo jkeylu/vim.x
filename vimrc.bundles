@@ -282,7 +282,7 @@ endif
 NeoBundle 'kshenoy/vim-signature'
 " }}}
 
-" Language specific
+" {{{ Language specific
 
 " {{{ syntastic
 " Syntax checking hacks for vim
@@ -373,6 +373,8 @@ if g:vimx#env.exists('c') || g:vimx#env.exists('cpp')
   NeoBundleLazy 'vim-scripts/a.vim', { 'autoload': { 'filetypes': [ 'c', 'cpp' ] } }
   " }}}
 endif
+
+" }}}
 
 " {{{ DoxygenToolkit.vim
 NeoBundle 'vim-scripts/DoxygenToolkit.vim'
@@ -472,6 +474,14 @@ map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map n <Plug>(easymotion-next)
 map N <Plug>(easymotion-prev)
+" }}}
+
+" {{{ vim-rooter
+NeoBundle 'airblade/vim-rooter'
+
+let g:rooter_use_lcd = 1
+let g:rooter_change_directory_for_non_project_files = 1
+let g:rooter_silent_chdir = 1
 " }}}
 
 " {{{ auto-pairs
