@@ -16,15 +16,19 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
-" {{{ seoul256.vim
-NeoBundle 'junegunn/seoul256.vim'
+" {{{ gruvbox
+NeoBundle 'morhetz/gruvbox'
 
-let bundle = neobundle#get('seoul256.vim')
+if &t_Co <= 16
+  let g:gruvbox_termcolors = 16
+endif
+
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_light = 'hard'
+
+let bundle = neobundle#get('gruvbox')
 function! bundle.hooks.on_post_source(bundle)
-  if &t_Co >= 256 || has('gui_running')
-    let g:seoul256_background = 234
-    silent! colorscheme seoul256
-  endif
+  silent! colorscheme gruvbox
 endfunction
 " }}}
 
