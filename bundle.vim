@@ -262,6 +262,7 @@ if v:version > 702
   " }}}
 endif
 
+" {{{ snippet
 if g:vimx#env.exists('snippet')
   NeoBundle 'garbas/vim-snipmate',
         \ {
@@ -273,6 +274,7 @@ if g:vimx#env.exists('snippet')
 
   NeoBundle 'honza/vim-snippets'
 endif
+" }}}
 
 " {{{ vim-bookmarks
 " Usage:
@@ -465,7 +467,7 @@ endif
 " `\b`
 " `\e`
 " `\f` looking for
-NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'easymotion/vim-easymotion'
 
 let g:EasyMotion_smartcase = 1
 map \ <Plug>(easymotion-prefix)
