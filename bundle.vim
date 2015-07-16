@@ -62,11 +62,11 @@ endif
 " }}}
 
 " {{{ supertab
-" Note: Default tab literal is mapped by `<c-v>`
+" Note: Default tab literal is mapped by `<C-t>`
 NeoBundle 'ervandew/supertab'
 
 let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabMappingTabLiteral='<C-v>'
+let g:SuperTabMappingTabLiteral='<C-t>'
 
 autocmd FileType typescript
       \ let b:SuperTabCompletionContexts
