@@ -12,6 +12,9 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 
 " {{{ neobundle.vim
 " let NeoBundle manage NeoBundle
+" Usage:
+" `:NeoBundleUpdate`
+" `:Unite neobundle/update`
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
@@ -283,100 +286,6 @@ NeoBundle 'MattesGroeger/vim-bookmarks'
 let g:bookmark_auto_save_file = $HOME.'/.cache/vim-bookmarks'
 " }}}
 
-" {{{ Language specific
-
-" {{{ syntastic
-" Syntax checking hacks for vim
-if g:vimx#env.exists('syntastic')
-  NeoBundle 'scrooloose/syntastic'
-
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 0
-endif
-" }}}
-
-" {{{ emmet-vim
-" Usage: `<c-y>,`
-NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': [ 'html', 'css' ] } }
-" }}}
-
-" {{{ vim-markdown
-NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': [ 'markdown' ] } }
-" }}}
-
-if g:vimx#env.exists('javascript')
-  " {{{ vim-stylus
-  NeoBundleLazy 'wavded/vim-stylus', { 'autoload': { 'filetypes': [ 'stylus' ] } }
-  " }}}
-
-  " {{{ vim-node
-  " Usage:
-  " Use `gf` inside `require('...')` to jump to source and module files
-  " Use `[I` on any keyword to look for it in the current and required files
-  " Use `:Nedit module_name` to edit the main file of a module
-  " Use `:Nedit module_name/lib/foo` to edit its `lib/foo.js` file
-  " Use `:Nedit .` to edit your Node projects main file
-  NeoBundleLazy 'moll/vim-node', { 'autoload': { 'filetypes': [ 'javascript' ] } }
-  " }}}
-
-  " {{{ vim-node-dict
-  NeoBundleLazy 'guileen/vim-node-dict', { 'autoload': { 'filetypes': [ 'javascript' ] } }
-
-  autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node-dict/dict/node.dict
-  " }}}
-
-  " {{{ vim-javascript
-  NeoBundleLazy 'pangloss/vim-javascript', { 'autoload': { 'filetypes': [ 'javascript' ] } }
-
-  let g:html_indent_inctags = 'html,body,head,tbody'
-  let g:html_indent_script1 = 'inc'
-  let g:html_indent_style1 = 'inc'
-  " }}}
-endif
-
-if g:vimx#env.exists('python')
-  " {{{ vim-python-pep8-indent
-  NeoBundleLazy 'hynek/vim-python-pep8-indent', { 'autoload': { 'filetypes': [ 'python' ] } }
-  " }}}
-endif
-
-if g:vimx#env.exists('coffee')
-  " {{{ vim-coffee-script
-  NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': { 'filetypes': [ 'coffee' ] } }
-  " }}}
-endif
-
-if g:vimx#env.exists('typescript') && (v:version >= 704)
-  " {{{ typescript-vim
-  " Usage: `:make`
-  NeoBundleLazy 'leafgarland/typescript-vim', { 'autoload': { 'filetypes': [ 'typescript' ] } }
-  " }}}
-
-  " {{{ tsuquyomi
-  " Usage:
-  " `<c-]>` Nav to definition
-  " `<c-t>` Move the cursor to the location where the last `<c-]>` was typed
-  " `<c-^>a` Show references
-  " `:TsuquyomiRenameSymbol`
-  NeoBundleLazy 'Quramy/tsuquyomi', { 'autoload': { 'filetypes': [ 'typescript' ] } }
-  " }}}
-endif
-
-if g:vimx#env.exists('c') || g:vimx#env.exists('cpp')
-  " {{{ a.vim
-  " Usage: `:A`
-  NeoBundleLazy 'vim-scripts/a.vim', { 'autoload': { 'filetypes': [ 'c', 'cpp' ] } }
-  " }}}
-endif
-
-" }}}
-
 " {{{ DoxygenToolkit.vim
 NeoBundle 'vim-scripts/DoxygenToolkit.vim'
 " }}}
@@ -483,6 +392,106 @@ NeoBundle 'airblade/vim-rooter'
 let g:rooter_use_lcd = 1
 let g:rooter_change_directory_for_non_project_files = 1
 let g:rooter_silent_chdir = 1
+" }}}
+
+" {{{ Language specific
+
+" {{{ syntastic
+" Syntax checking hacks for vim
+if g:vimx#env.exists('syntastic')
+  NeoBundle 'scrooloose/syntastic'
+
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+endif
+" }}}
+
+" {{{ emmet-vim
+" Usage: `<c-y>,`
+NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': [ 'html', 'css' ] } }
+" }}}
+
+" {{{ vim-markdown
+NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': [ 'markdown' ] } }
+" }}}
+
+if g:vimx#env.exists('javascript')
+  " {{{ vim-stylus
+  NeoBundleLazy 'wavded/vim-stylus', { 'autoload': { 'filetypes': [ 'stylus' ] } }
+  " }}}
+
+  " {{{ vim-node
+  " Usage:
+  " Use `gf` inside `require('...')` to jump to source and module files
+  " Use `[I` on any keyword to look for it in the current and required files
+  " Use `:Nedit module_name` to edit the main file of a module
+  " Use `:Nedit module_name/lib/foo` to edit its `lib/foo.js` file
+  " Use `:Nedit .` to edit your Node projects main file
+  NeoBundleLazy 'moll/vim-node', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+  " }}}
+
+  " {{{ vim-node-dict
+  NeoBundleLazy 'guileen/vim-node-dict', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+
+  autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node-dict/dict/node.dict
+  " }}}
+
+  " {{{ vim-javascript
+  NeoBundleLazy 'pangloss/vim-javascript', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+
+  let g:html_indent_inctags = 'html,body,head,tbody'
+  let g:html_indent_script1 = 'inc'
+  let g:html_indent_style1 = 'inc'
+  " }}}
+endif
+
+if g:vimx#env.exists('python')
+  " {{{ vim-python-pep8-indent
+  NeoBundleLazy 'hynek/vim-python-pep8-indent', { 'autoload': { 'filetypes': [ 'python' ] } }
+  " }}}
+endif
+
+if g:vimx#env.exists('coffee')
+  " {{{ vim-coffee-script
+  NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': { 'filetypes': [ 'coffee' ] } }
+  " }}}
+endif
+
+if g:vimx#env.exists('typescript') && (v:version >= 704)
+  " {{{ typescript-vim
+  " Usage: `:make`
+  NeoBundleLazy 'leafgarland/typescript-vim', { 'autoload': { 'filetypes': [ 'typescript' ] } }
+  " }}}
+
+  " {{{ tsuquyomi
+  " Usage:
+  " `<c-]>` Nav to definition
+  " `<c-t>` Move the cursor to the location where the last `<c-]>` was typed
+  " `<c-^>a` Show references
+  " `:TsuquyomiRenameSymbol`
+  NeoBundleLazy 'Quramy/tsuquyomi', { 'autoload': { 'filetypes': [ 'typescript' ] } }
+  " }}}
+endif
+
+if g:vimx#env.exists('c') || g:vimx#env.exists('cpp')
+  " {{{ a.vim
+  " Usage: `:A`
+  NeoBundleLazy 'vim-scripts/a.vim', { 'autoload': { 'filetypes': [ 'c', 'cpp' ] } }
+  " }}}
+endif
+
+if g:vimx#env.exists('rust')
+  " {{{ rust.vim
+  NeoBundleLazy 'rust-lang/rust.vim', { 'autoload': { 'filetype': [ 'rust' ] } }
+  " }}}
+endif
+
 " }}}
 
 " {{{ auto-pairs
