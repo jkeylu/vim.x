@@ -8,13 +8,13 @@ vim.x
     ```
     $ git clone https://github.com/jkeylu/vim.x.git ~/.vim
     $ cd ~/.vim
-    $ ./vimx
+    $ ./install.sh
     ```
 2. Install configured bundles
 
-    Launch `vim`, run `:BundleInstall` 
+    Launch `vim`, run `:NeoBundleInstall` 
     (or `vim +BundleInstall +qall` for CLI lovers)
 
 3. Update bundles
 
-    Lunch `vim`, run `:BundleInstall!`
+    Lunch `vim`, run `:NeoBundleUpdate`
