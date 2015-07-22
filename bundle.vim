@@ -422,6 +422,14 @@ NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': [ 'markdown' ] 
 " }}}
 
 if g:vimx#env.exists('javascript')
+  " {{{ vim-css3-syntax
+  NeoBundle 'hail2u/vim-css3-syntax', { 'autoload': { 'filetype': [ 'css', 'less', 'stylus' ] } }
+  " }}}
+
+  " {{{ vim-less
+  NeoBundleLazy 'groenewege/vim-less', { 'autoload': { 'filetype': [ 'less' ] } }
+  " }}}
+
   " {{{ vim-stylus
   NeoBundleLazy 'wavded/vim-stylus', { 'autoload': { 'filetypes': [ 'stylus' ] } }
   " }}}
@@ -473,7 +481,7 @@ if g:vimx#env.exists('typescript') && (v:version >= 704)
   " Usage:
   " `<c-]>` Nav to definition
   " `<c-t>` Move the cursor to the location where the last `<c-]>` was typed
-  " `<c-^>a` Show references
+  " `<c-^>` Show references
   " `:TsuquyomiRenameSymbol`
   NeoBundleLazy 'Quramy/tsuquyomi', { 'autoload': { 'filetypes': [ 'typescript' ] } }
   " }}}

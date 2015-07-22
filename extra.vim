@@ -19,6 +19,9 @@ nnoremap <space> @=((foldclosed(line('.'))<0) ? 'zc' : 'zo')<cr>
 inoremap <expr> <C-j> pumvisible()?'<C-n>':'<C-x><C-o>'
 inoremap <expr> <C-k> pumvisible()?'<C-p>':'<C-k>'
 
+vnoremap $ $h
+
 autocmd FileType help nmap <buffer> q :q<CR>
+autocmd FileType qf nmap <buffer> q :q<CR>
 
 " vim:ft=vim fdm=marker et ts=4 sw=2 sts=2

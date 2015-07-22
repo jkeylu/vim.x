@@ -1,7 +1,7 @@
 *.swp
 .netrwhist
-.env
-vimrc.before
-vimrc.after
+
+before.vim
+after.vim
 
 bundle/

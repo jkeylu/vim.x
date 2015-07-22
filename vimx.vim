@@ -26,7 +26,7 @@ let s:configFilePath = expand('~/.cache/vimx')
 let s:config =
       \ {
       \   'env': { 'names': [] },
-      \   'setting': {  }
+      \   'set': {}
       \ }
 function! s:loadConfig()
   if filereadable(s:configFilePath)
@@ -102,9 +102,9 @@ command! -nargs=0 VimxEnvList call g:vimx#env.list()
 " }}}
 
 " {{{
-let g:vimx#setting = {}
+let g:vimx#set = {}
 
-function! g:vimx#setting.loadSet(name, ...)
+function! g:vimx#set.load(name, ...)
   let l:expr = 'set '
 
   if a:0 == 0
@@ -116,8 +116,8 @@ function! g:vimx#setting.loadSet(name, ...)
       let l:option = strpart(a:name, 2, strlen(a:name) - 2)
     endif
 
-    if has_key(s:config.setting, l:option)
-      let l:expr .= (s:config.setting[l:option] ? '' : 'no') . l:option
+    if has_key(s:config.set, l:option)
+      let l:expr .= (s:config.set[l:option] ? '' : 'no') . l:option
     else
       let l:expr .= a:name
     endif
@@ -126,8 +126,8 @@ function! g:vimx#setting.loadSet(name, ...)
     " set {option}={value}
     let expr .= a:name . '='
 
-    if has_key(s:config.setting, a:name)
-      let expr .= s:config.setting[a:name]
+    if has_key(s:config.set, a:name)
+      let expr .= s:config.set[a:name]
     else
       let expr .= a:1
     endif
@@ -136,7 +136,7 @@ function! g:vimx#setting.loadSet(name, ...)
   exe expr
 endfunction
 
-function! g:vimx#setting.saveSet(name, ...)
+function! g:vimx#set.save(name, ...)
   let l:option = a:name
   let l:value = a:0 == 0 ? 1 : a:1
 
@@ -147,11 +147,27 @@ function! g:vimx#setting.saveSet(name, ...)
     endif
   endif
 
-  let s:config.setting[l:option] = l:value
+  let s:config.set[l:option] = l:value
 endfunction
 
-command! -nargs=+ VimxLoadSet call g:vimx#setting.loadSet(<f-args>)
-command! -nargs=+ VimxSet call g:vimx#setting.saveSet(<f-args>) | call s:saveConfig()
+command! -nargs=+ VimxLoadSet call g:vimx#set.load(<f-args>)
+command! -nargs=+ VimxSet call g:vimx#set.save(<f-args>) | call s:saveConfig()
+" }}}
+
+" {{{
+let g:vimx#command = {}
+
+function! g:vimx#command.load(name, ...)
+  if a:name == 'set' || a:name == 'let'
+    return
+  endif
+endfunction
+
+function! g:vimx#command.save(name, ...)
+  if a:name == 'set' || a:name == 'let'
+    return
+  endif
+endfunction
 " }}}
 
 " vim:ft=vim fdm=marker et ts=4 sw=2 sts=2
