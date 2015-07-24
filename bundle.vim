@@ -29,10 +29,14 @@ endif
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
 
-let bundle = neobundle#get('gruvbox')
-function! bundle.hooks.on_post_source(bundle)
-  silent! colorscheme gruvbox
-endfunction
+if neobundle#tap('gruvbox')
+
+  function! neobundle#hooks.on_source(bundle)
+    silent! colorscheme gruvbox
+  endfunction
+
+  call neobundle#untap()
+endif
 " }}}
 
 " {{{ vimcdoc
@@ -79,7 +83,20 @@ endfunction
 " }}}
 
 " {{{ neocomplete | neocomplcache
-if has('lua')
+if v:version >= 703 && has('python')
+      \ && !(g:vimx#platform.isMswin() || g:vimx#platform.isCygwin())
+      \ || g:vimx#env.exists('ycm')
+  NeoBundle 'Valloric/YouCompleteMe',
+        \ {
+        \   'build': {
+        \     'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \     'unix'    : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \     'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \     'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+        \   }
+        \ }
+
+elseif has('lua')
   " for windows [download Lua](http://lua-users.org/wiki/LuaBinaries) and put
   " the lua52.dll file in the same directory as gvim.exe
   " for Mac OSX `brew install vim --with-lua`
@@ -174,7 +191,7 @@ else
   " just like bufexplorer
   nmap <leader><leader> :Unite buffer bookmark<CR>
   " just like ctrlp.vim
-  nnoremap <C-p> :<C-u>UniteWithProjectDir -start-insert file_rec/async<CR>
+  nnoremap <silent> <C-f> :<C-u>UniteWithProjectDir -start-insert file_rec/async<CR>
 
   autocmd Filetype unite call s:uniteSettings()
   function! s:uniteSettings()
@@ -248,6 +265,9 @@ let g:multi_cursor_quit_key = '<Tab>'
 " `<c-d>` scroll down
 " `<c-u>` scroll up
 NeoBundle 'yonchu/accelerated-smooth-scroll'
+let g:ac_smooth_scroll_no_default_key_mappings = 1
+nmap <silent> <C-d> <Plug>(ac-smooth-scroll-c-d)
+nmap <silent> <C-u> <Plug>(ac-smooth-scroll-c-u)
 " }}}
 
 " {{{ vim-better-whitespace
@@ -372,14 +392,14 @@ endif
 
 " {{{ vim-easymotion
 " Usage:
-" `\w` word motion
-" `\b`
-" `\e`
-" `\f` looking for
+" `;w` word motion
+" `;b`
+" `;e`
+" `;f` looking for
 NeoBundle 'easymotion/vim-easymotion'
 
 let g:EasyMotion_smartcase = 1
-map \ <Plug>(easymotion-prefix)
+map ; <Plug>(easymotion-prefix)
 map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map n <Plug>(easymotion-next)
