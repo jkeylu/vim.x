@@ -65,59 +65,57 @@ if has('gui_running')
 endif
 " }}}
 
-" {{{ supertab
-" Note: Default tab literal is mapped by `<C-t>`
-NeoBundle 'ervandew/supertab'
-
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabMappingTabLiteral='<C-t>'
-
-autocmd FileType typescript
-      \ let b:SuperTabCompletionContexts
-      \   = [ 's:typescriptContext' ] + g:SuperTabCompletionContexts |
-      \ let b:SuperTabContextTextMemberPatterns = [ '\.' ]
-
-function! s:typescriptContext()
-  return "\<C-x>\<C-o>"
-endfunction
-" }}}
-
-" {{{ neocomplete | neocomplcache
 if v:version >= 703 && has('python')
       \ && !(g:vimx#platform.isMswin() || g:vimx#platform.isCygwin())
       \ || g:vimx#env.exists('ycm')
-  NeoBundle 'Valloric/YouCompleteMe',
-        \ {
-        \   'build': {
-        \     'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \     'unix'    : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \     'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \     'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
-        \   }
-        \ }
-
-elseif has('lua')
-  " for windows [download Lua](http://lua-users.org/wiki/LuaBinaries) and put
-  " the lua52.dll file in the same directory as gvim.exe
-  " for Mac OSX `brew install vim --with-lua`
-  NeoBundle 'Shougo/neocomplete.vim'
-
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#auto_completion_start_length = 4
-  let g:neocomplete#manual_completion_start_length = 4
-  let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#enable_camel_case = 1
+  " {{{ YouCompleteMe
+  " cd ~/.vim/bundle/YouCompleteMe
+  " git submodule update --init --recursive
+  " ./install.sh --clang-completer --system-libclang --omnisharp-completer --gocode-completer
+  NeoBundle 'Valloric/YouCompleteMe'
+  " }}}
 else
-  NeoBundle 'Shougo/neocomplcache.vim'
+  " {{{ supertab
+  " Note: Default tab literal is mapped by `<C-t>`
+  NeoBundle 'ervandew/supertab'
 
-  let g:neocomplcache_enable_at_startup = 1
-  let g:neocomplcache_auto_completion_start_length = 4
-  let g:neocomplcache_manual_completion_start_length = 4
-  let g:neocomplcache_enable_smart_case = 1
-  let g:neocomplcache_enable_camel_case_completion = 1
-  let g:neocomplcache_enable_underbar_completion = 1
+  let g:SuperTabDefaultCompletionType = 'context'
+  let g:SuperTabMappingTabLiteral='<C-t>'
+
+  autocmd FileType typescript
+        \ let b:SuperTabCompletionContexts
+        \   = [ 's:typescriptContext' ] + g:SuperTabCompletionContexts |
+        \ let b:SuperTabContextTextMemberPatterns = [ '\.' ]
+
+  function! s:typescriptContext()
+    return "\<C-x>\<C-o>"
+  endfunction
+  " }}}
+
+  " {{{ neocomplete | neocomplcache
+  if has('lua')
+    " for windows [download Lua](http://lua-users.org/wiki/LuaBinaries) and put
+    " the lua52.dll file in the same directory as gvim.exe
+    " for Mac OSX `brew install vim --with-lua`
+    NeoBundle 'Shougo/neocomplete.vim'
+
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#auto_completion_start_length = 4
+    let g:neocomplete#manual_completion_start_length = 4
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#enable_camel_case = 1
+  else
+    NeoBundle 'Shougo/neocomplcache.vim'
+
+    let g:neocomplcache_enable_at_startup = 1
+    let g:neocomplcache_auto_completion_start_length = 4
+    let g:neocomplcache_manual_completion_start_length = 4
+    let g:neocomplcache_enable_smart_case = 1
+    let g:neocomplcache_enable_camel_case_completion = 1
+    let g:neocomplcache_enable_underbar_completion = 1
+  endif
+  " }}}
 endif
-" }}}
 
 " {{{ nerdcommenter
 " Usage:
@@ -273,6 +271,8 @@ nmap <silent> <C-u> <Plug>(ac-smooth-scroll-c-u)
 " {{{ vim-better-whitespace
 " Usage: `:StripWhitespace`
 NeoBundle 'ntpeters/vim-better-whitespace'
+
+let g:better_whitespace_filetypes_blacklist = ['vimfiler', 'unite']
 " }}}
 
 if v:version > 702
@@ -370,9 +370,9 @@ if has('iconv')
   " `:FencManualEncoding utf-8`
   NeoBundle 'mbbill/fencview'
 
-  let g:fencview_autodetect = 1
-  let g:fencview_auto_patterns = '*.cnx,*.txt,*.html,*.php,*.cpp,*.h,*.c,*.css,*.js,*.ts,*.py,*.sh,*.java{|\=}'
-  let g:fencview_checklines = 10
+  "let g:fencview_autodetect = 1
+  "let g:fencview_auto_patterns = '*.cnx,*.txt,*.html,*.php,*.cpp,*.h,*.c,*.css,*.js,*.ts,*.py,*.sh,*.java{|\=}'
+  "let g:fencview_checklines = 10
   " }}}
 endif
 

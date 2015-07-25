@@ -78,6 +78,7 @@ autocmd BufNewFile,BufRead *.styl set filetype=stylus
 autocmd BufNewFile,BufRead *.rs set filetype=rust
 
 " file encodings and formats
+set encoding=utf-8
 set fileencodings=utf-8,gbk,gb2312,cp936
 set fileformats=unix,dos
 
