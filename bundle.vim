@@ -173,7 +173,7 @@ if g:vimx#env.exists('no-unite')
 
   let NERDTreeChDirMode = 2
   let NERDTreeWinSize = 25
-  "let NERDTreeQuitOnOpen = 1
+  let NERDTreeQuitOnOpen = 1
   let NERDTreeShowLineNumbers = 1
   let NERDTreeDirArrows = 0
 
@@ -206,34 +206,37 @@ else
     imap <buffer> <C-k> <Plug>(unite_select_previous_line)
   endfunction
 
-  let bundle = neobundle#get('unite.vim')
-  function! bundle.hooks.on_post_source(bundle)
-    call unite#custom#profile('default', 'context',
-          \ {
-          \   'start_insert': 0,
-          \   'winheight': 10,
-          \   'prompt': '> ',
-          \   'direction': 'botright'
-          \ })
+  if neobundle#tap('unite.vim')
+    function! neobundle#hooks.on_source(bundle)
+      call unite#custom#profile('default', 'context',
+            \ {
+            \   'start_insert': 0,
+            \   'winheight': 10,
+            \   'prompt': '> ',
+            \   'direction': 'botright'
+            \ })
 
-    call unite#custom#source('file_rec/async', 'ignore_pattern',
-          \ join([
-          \   '\.git/',
-          \   'node_modules/',
-          \   'bower_components/'
-          \ ], '\|'))
+      call unite#custom#source('file_rec/async', 'ignore_pattern',
+            \ join([
+            \   '\.git/',
+            \   'node_modules/',
+            \   'bower_components/'
+            \ ], '\|'))
 
-    call unite#custom#source('file_rec/async', 'matchers',
-          \ [
-          \   'matcher_context',
-          \   'matcher_hide_current_file'
-          \ ])
+      call unite#custom#source('file_rec/async', 'matchers',
+            \ [
+            \   'matcher_context',
+            \   'matcher_hide_current_file'
+            \ ])
 
-    call unite#custom#source('file_rec/async', 'sorters',
-          \ [
-          \   'sorter_length'
-          \ ])
-  endfunction
+      call unite#custom#source('file_rec/async', 'sorters',
+            \ [
+            \   'sorter_length'
+            \ ])
+    endfunction
+
+    call neobundle#untap()
+  endif
   " }}}
 
   " {{{ vimfiler.vim
@@ -242,7 +245,7 @@ else
   " in vimfiler `&` switch to project directory
   NeoBundle 'Shougo/vimfiler.vim'
 
-  nmap <leader>nt :VimFiler -explorer -parent -status -auto-cd -auto-expand -find<CR>
+  nmap <silent> <leader>nt :VimFiler -explorer -parent -status -auto-cd -auto-expand -find -force-quit<CR>
 
   autocmd Filetype vimfiler call s:vimfilerSettings()
   function! s:vimfilerSettings()
@@ -263,16 +266,20 @@ let g:multi_cursor_quit_key = '<Tab>'
 " `<c-d>` scroll down
 " `<c-u>` scroll up
 NeoBundle 'yonchu/accelerated-smooth-scroll'
+
 let g:ac_smooth_scroll_no_default_key_mappings = 1
+
 nmap <silent> <C-d> <Plug>(ac-smooth-scroll-c-d)
 nmap <silent> <C-u> <Plug>(ac-smooth-scroll-c-u)
+nmap <silent> <S-d> <Plug>(ac-smooth-scroll-c-f)
+nmap <silent> <S-u> <Plug>(ac-smooth-scroll-c-b)
 " }}}
 
 " {{{ vim-better-whitespace
 " Usage: `:StripWhitespace`
 NeoBundle 'ntpeters/vim-better-whitespace'
 
-let g:better_whitespace_filetypes_blacklist = ['vimfiler', 'unite']
+let g:better_whitespace_filetypes_blacklist = ['vimfiler', 'unite', 'help']
 " }}}
 
 if v:version > 702

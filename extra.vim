@@ -16,8 +16,8 @@ endif
 " toggle fold
 nnoremap <space> @=((foldclosed(line('.'))<0) ? 'zc' : 'zo')<cr>
 
-inoremap <expr> <C-j> pumvisible()?'<C-n>':'<C-x><C-o>'
-inoremap <expr> <C-k> pumvisible()?'<C-p>':'<C-k>'
+inoremap <expr> <C-j> pumvisible() ? '<C-n>' : '<C-x><C-o>'
+inoremap <expr> <C-k> pumvisible() ? '<C-p>' : '<C-k>'
 
 vnoremap $ $h
 
