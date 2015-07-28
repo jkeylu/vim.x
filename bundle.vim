@@ -194,6 +194,7 @@ else
   autocmd Filetype unite call s:uniteSettings()
   function! s:uniteSettings()
     imap <buffer> jj <Plug>(unite_insert_leave)
+    imap <buffer> kk <Plug>(unite_insert_leave)
 
     imap <buffer> <Esc> <Plug>(unite_exit)
     nmap <buffer> <Esc> <Plug>(unite_exit)
@@ -204,6 +205,8 @@ else
 
     imap <buffer> <C-j> <Plug>(unite_select_next_line)
     imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+
+    nmap <buffer> / <Plug>(unite_append_end)
   endfunction
 
   if neobundle#tap('unite.vim')
