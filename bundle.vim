@@ -505,6 +505,10 @@ if g:vimx#env.exists('javascript')
   let g:html_indent_script1 = 'inc'
   let g:html_indent_style1 = 'inc'
   " }}}
+
+  " {{{ tern_for_vim
+  NeoBundle 'marijnh/tern_for_vim'
+  " }}}
 endif
 
 if g:vimx#env.exists('python')
