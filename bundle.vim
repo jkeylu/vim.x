@@ -186,10 +186,28 @@ else
   " {{{ unite.vim
   NeoBundle 'Shougo/unite.vim'
 
+  let g:unite_source_grep_max_candidates = 200
+
+  if executable('ag')
+    let g:unite_source_rec_async_command =
+          \ 'ag --follow --nocolor --nogroup --hidden -g ""'
+
+    " Use ag in unite grep source.
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+          \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+          \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    let g:unite_source_grep_recursive_opt = ''
+  endif
+
   " just like bufexplorer
   nmap <leader><leader> :Unite buffer bookmark<CR>
+
   " just like ctrlp.vim
   nnoremap <silent> <C-f> :<C-u>UniteWithProjectDir -start-insert file_rec/async<CR>
+
+  " just like ctrlf.vim
+  nmap <silent> <S-f> :Unite grep<CR>
 
   autocmd Filetype unite call s:uniteSettings()
   function! s:uniteSettings()
