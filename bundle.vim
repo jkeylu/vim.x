@@ -494,7 +494,7 @@ if g:vimx#env.exists('javascript')
   " Use `:Nedit module_name` to edit the main file of a module
   " Use `:Nedit module_name/lib/foo` to edit its `lib/foo.js` file
   " Use `:Nedit .` to edit your Node projects main file
-  NeoBundleLazy 'moll/vim-node', { 'autoload': { 'filetypes': [ 'javascript' ] } }
+  NeoBundle 'moll/vim-node'
   " }}}
 
   " {{{ vim-node-dict
@@ -529,6 +529,7 @@ if g:vimx#env.exists('javascript')
   function! s:ternSettings()
     nmap <silent> <buffer> <C-]> :TernDef<CR>
     nmap <silent> <buffer> <C-^> :TernRefs<CR>
+    nmap <silent> <buffer> <C-@> :TernRename<CR>
   endfunction
   " }}}
 endif
@@ -558,6 +559,10 @@ if g:vimx#env.exists('typescript') && (v:version >= 704)
   " `<c-^>` Show references
   " `:TsuquyomiRenameSymbol`
   NeoBundleLazy 'Quramy/tsuquyomi', { 'autoload': { 'filetypes': [ 'typescript' ] } }
+
+  augroup vimx
+    autocmd FileType typescript nmap <silent> <buffer> <C-@> :TsuquyomiRenameSymbol<CR>
+  augroup END
   " }}}
 endif
 
