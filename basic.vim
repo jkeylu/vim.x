@@ -66,14 +66,14 @@ set tabstop=4
 set shiftwidth=2
 set softtabstop=2
 
-augroup vimx-indent
+augroup vimx
   autocmd FileType markdown set shiftwidth=4 softtabstop=4
   autocmd FileType python set shiftwidth=4 softtabstop=4
   autocmd FileType typescript set shiftwidth=4 softtabstop=4
 augroup END
 
 " auto set file type
-augroup vimx-filetypedetect
+augroup vimx
   autocmd BufNewFile,BufRead *.md set filetype=markdown
   autocmd BufNewFile,BufRead *.coffee set filetype=coffee
   autocmd BufNewFile,BufRead *.ts set filetype=typescript
