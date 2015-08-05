@@ -66,16 +66,20 @@ set tabstop=4
 set shiftwidth=2
 set softtabstop=2
 
-autocmd FileType markdown set shiftwidth=4 softtabstop=4
-autocmd FileType python set shiftwidth=4 softtabstop=4
-autocmd FileType typescript set shiftwidth=4 softtabstop=4
+augroup vimx-indent
+  autocmd FileType markdown set shiftwidth=4 softtabstop=4
+  autocmd FileType python set shiftwidth=4 softtabstop=4
+  autocmd FileType typescript set shiftwidth=4 softtabstop=4
+augroup END
 
 " auto set file type
-autocmd BufNewFile,BufRead *.md set filetype=markdown
-autocmd BufNewFile,BufRead *.coffee set filetype=coffee
-autocmd BufNewFile,BufRead *.ts set filetype=typescript
-autocmd BufNewFile,BufRead *.styl set filetype=stylus
-autocmd BufNewFile,BufRead *.rs set filetype=rust
+augroup vimx-filetypedetect
+  autocmd BufNewFile,BufRead *.md set filetype=markdown
+  autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+  autocmd BufNewFile,BufRead *.ts set filetype=typescript
+  autocmd BufNewFile,BufRead *.styl set filetype=stylus
+  autocmd BufNewFile,BufRead *.rs set filetype=rust
+augroup END
 
 " file encodings and formats
 set encoding=utf-8
@@ -83,8 +87,7 @@ set fileencodings=utf-8,gbk,gb2312,cp936
 set fileformats=unix,dos
 
 " remember the position of the last time view
-augroup vimrcEx
-  autocmd!
+augroup vimx
   autocmd FileType text setlocal textwidth=78
   autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |

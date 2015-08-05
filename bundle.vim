@@ -82,10 +82,12 @@ else
   let g:SuperTabDefaultCompletionType = 'context'
   let g:SuperTabMappingTabLiteral='<C-t>'
 
-  autocmd FileType typescript
-        \ let b:SuperTabCompletionContexts
-        \   = [ 's:typescriptContext' ] + g:SuperTabCompletionContexts |
-        \ let b:SuperTabContextTextMemberPatterns = [ '\.' ]
+  augroup vimx
+    autocmd FileType typescript
+          \ let b:SuperTabCompletionContexts
+          \   = [ 's:typescriptContext' ] + g:SuperTabCompletionContexts |
+          \ let b:SuperTabContextTextMemberPatterns = [ '\.' ]
+  augroup END
 
   function! s:typescriptContext()
     return "\<C-x>\<C-o>"
@@ -201,7 +203,7 @@ else
   endif
 
   " just like bufexplorer
-  nmap <leader><leader> :Unite buffer bookmark<CR>
+  nmap <silent> <leader><leader> :Unite buffer bookmark<CR>
 
   " just like ctrlp.vim
   nnoremap <silent> <C-f> :<C-u>UniteWithProjectDir -start-insert file_rec/async<CR>
@@ -209,7 +211,10 @@ else
   " just like ctrlf.vim
   nmap <silent> <S-f> :Unite grep<CR>
 
-  autocmd Filetype unite call s:uniteSettings()
+  augroup vimx
+    autocmd Filetype unite call s:uniteSettings()
+  augroup END
+
   function! s:uniteSettings()
     imap <buffer> jj <Plug>(unite_insert_leave)
     imap <buffer> kk <Plug>(unite_insert_leave)
@@ -495,7 +500,9 @@ if g:vimx#env.exists('javascript')
   " {{{ vim-node-dict
   NeoBundleLazy 'guileen/vim-node-dict', { 'autoload': { 'filetypes': [ 'javascript' ] } }
 
-  autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node-dict/dict/node.dict
+  augroup vimx
+    autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node-dict/dict/node.dict
+  augroup END
   " }}}
 
   " {{{ vim-javascript
@@ -508,6 +515,15 @@ if g:vimx#env.exists('javascript')
 
   " {{{ tern_for_vim
   NeoBundle 'marijnh/tern_for_vim'
+
+  augroup vimx
+    autocmd FileType javascript call s:ternSettings()
+  augroup END
+
+  function! s:ternSettings()
+    nmap <silent> <buffer> <C-]> :TernDef<CR>
+    nmap <silent> <buffer> <C-^> :TernRefs<CR>
+  endfunction
   " }}}
 endif
 

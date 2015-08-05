@@ -21,7 +21,9 @@ inoremap <expr> <C-k> pumvisible() ? '<C-p>' : '<C-k>'
 
 vnoremap $ $h
 
-autocmd FileType help nmap <buffer> q :q<CR>
-autocmd FileType qf nmap <buffer> q :q<CR>
+augroup vimx
+  autocmd FileType help nmap <silent> <buffer> q :q<CR>
+  autocmd FileType qf nmap <silent> <buffer> q :q<CR>
+augroup END
 
 " vim:ft=vim fdm=marker et ts=4 sw=2 sts=2
