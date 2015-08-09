@@ -90,9 +90,9 @@ set fileformats=unix,dos
 augroup vimx
   autocmd FileType text setlocal textwidth=78
   autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \	exe "normal! g`\"" |
-    \ endif
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \	exe "normal! g`\"" |
+        \ endif
 augroup END
 
 

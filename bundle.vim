@@ -209,7 +209,7 @@ else
   nnoremap <silent> <C-f> :<C-u>UniteWithProjectDir -start-insert file_rec/async<CR>
 
   " just like ctrlf.vim
-  nmap <silent> <S-f> :Unite grep<CR>
+  nmap <silent> <S-f> :Unite -no-quit grep<CR>
 
   augroup vimx
     autocmd Filetype unite call s:uniteSettings()
