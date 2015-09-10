@@ -186,6 +186,8 @@ if g:vimx#env.exists('no-unite')
   " }}}
 else
   " {{{ unite.vim
+  " Usage:
+  " `C-l` clear cache
   NeoBundle 'Shougo/unite.vim'
 
   let g:unite_source_grep_max_candidates = 200
@@ -203,7 +205,7 @@ else
   endif
 
   " just like bufexplorer
-  nmap <silent> <leader><leader> :Unite buffer bookmark<CR>
+  nmap <silent> <leader><leader> :<C-u>Unite buffer bookmark<CR>
 
   " just like ctrlp.vim
   nnoremap <silent> <C-f> :<C-u>UniteWithProjectDir -start-insert file_rec/async<CR>
@@ -269,13 +271,41 @@ else
   " Usage:
   " `<leader>nt`
   " in vimfiler `&` switch to project directory
-  NeoBundle 'Shougo/vimfiler.vim'
+  "NeoBundle 'Shougo/vimfiler.vim'
+  NeoBundleLazy 'Shougo/vimfiler.vim',
+        \ {
+        \   'depends': 'Shougo/unite.vim',
+        \   'autoload': {
+        \     'commands': [
+        \       {
+        \         'name': 'VimFiler',
+        \         'complete': 'customlist,vimfiler#complete'
+        \       },
+        \       'VimFilerExplorer',
+        \       'Edit',
+        \       'Read',
+        \       'Source',
+        \       'Write'
+        \     ],
+        \     'mappings': '<Plug>',
+        \     'explorer': 1
+        \   }
+        \ }
 
   nmap <silent> <leader>nt :VimFiler -explorer -parent -status -auto-cd -auto-expand -find -force-quit<CR>
 
-  autocmd Filetype vimfiler call s:vimfilerSettings()
+  augroup vimx
+    autocmd Filetype vimfiler call s:vimfilerSettings()
+  augroup END
   function! s:vimfilerSettings()
     nmap <buffer> q <Plug>(vimfiler_close)
+
+    " fixed in vimfiler
+    " https://github.com/ntpeters/vim-better-whitespace/issues/21
+    if exists('g:loaded_better_whitespace_plugin')
+      DisableWhitespace
+      EnableWhitespace
+    endif
   endfunction
   " }}}
 endif
@@ -305,7 +335,7 @@ nmap <silent> <S-u> <Plug>(ac-smooth-scroll-c-b)
 " Usage: `:StripWhitespace`
 NeoBundle 'ntpeters/vim-better-whitespace'
 
-let g:better_whitespace_filetypes_blacklist = ['vimfiler', 'unite', 'help']
+let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'vimfiler']
 " }}}
 
 if v:version > 702
