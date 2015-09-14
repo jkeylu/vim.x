@@ -611,6 +611,14 @@ endif
 
 " }}}
 
+" {{{ vim-table-mode
+" Usage:
+" `<leader>tm`
+NeoBundle 'dhruvasagar/vim-table-mode'
+
+let g:table_mode_header_fillchar = '='
+" }}}
+
 " {{{ delimitMate
 " `<S-Tab>`
 " `<C-G>g`
