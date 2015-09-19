@@ -613,10 +613,23 @@ endif
 
 " {{{ vim-table-mode
 " Usage:
-" `<leader>tm`
+" `<leader>tm` Toggle table mode for the current buffer. You can change this using the |toggle-mode-options-toggle-map| option.
+" `<leader>tt` Triggers |table-mode-commands-tableize| on the visually selected content.
 NeoBundle 'dhruvasagar/vim-table-mode'
 
 let g:table_mode_header_fillchar = '='
+" }}}
+
+" {{{ vim-choosewin
+" Usage:
+" `=` invoke choosewin mode
+" `s` Swap window
+" `S` Swap window but stay
+NeoBundle 't9md/vim-choosewin'
+
+let g:choosewin_overlay_enable = 1
+
+nmap = <Plug>(choosewin)
 " }}}
 
 " {{{ delimitMate
