@@ -199,8 +199,11 @@ else
     " Use ag in unite grep source.
     let g:unite_source_grep_command = 'ag'
     let g:unite_source_grep_default_opts =
-          \ '-i --vimgrep --hidden --ignore ' .
-          \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+          \ '-i --vimgrep --literal --hidden ' .
+          \ '--ignore ''.hg'' ' .
+          \ '--ignore ''.svn'' ' .
+          \ '--ignore ''.git'' ' .
+          \ '--ignore ''.bzr'''
     let g:unite_source_grep_recursive_opt = ''
   endif
 
@@ -364,6 +367,18 @@ endif
 
 " {{{ vim-bookmarks
 " Usage:
+" | Action                                     | Shortcut | Command                   |
+" | Add/remove bookmark at current line        | mm       | :BookmarkToggle           |
+" | Add/edit/remove annotation at current line | mi       | :BookmarkAnnotate <TEXT>  |
+" | Jump to next bookmark in buffer            | mn       | :BookmarkNext             |
+" | Jump to previous bookmark in buffer        | mp       | :BookmarkPrev             |
+" | Show all bookmarks (toggle)                | ma       | :BookmarkShowAll          |
+" | Clear bookmarks in current buffer only     | mc       | :BookmarkClear            |
+" | Clear bookmarks in all buffers             | mx       | :BookmarkClearAll         |
+" | Move up bookmark at current line           | mkk      | :BookmarkMoveUp           |
+" | Move down bookmark at current line         | mjj      | :BookmarkMoveDown         |
+" | Save all bookmarks to a file               |          | :BookmarkSave <FILE_PATH> |
+" | Load bookmarks from a file                 |          | :BookmarkLoad <FILE_PATH> |
 NeoBundle 'MattesGroeger/vim-bookmarks'
 
 let g:bookmark_auto_save_file = $HOME.'/.cache/vim-bookmarks'
@@ -630,6 +645,10 @@ NeoBundle 't9md/vim-choosewin'
 let g:choosewin_overlay_enable = 1
 
 nmap = <Plug>(choosewin)
+" }}}
+
+" {{{ lightline.vim
+NeoBundle 'itchyny/lightline.vim'
 " }}}
 
 " {{{ delimitMate
