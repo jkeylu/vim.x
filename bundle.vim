@@ -599,14 +599,14 @@ if g:vimx#env.exists('typescript') && (v:version >= 704)
 
   " {{{ tsuquyomi
   " Usage:
-  " `<c-]>` Nav to definition
-  " `<c-t>` Move the cursor to the location where the last `<c-]>` was typed
-  " `<c-^>` Show references
-  " `:TsuquyomiRenameSymbol`
-  NeoBundleLazy 'Quramy/tsuquyomi'
+  " `<C-]>` Nav to definition
+  " `<C-t>` Move the cursor to the location where the last `<c-]>` was typed
+  " `<C-^>` Show references
+  " `<C-@>` Rename symbols
+  NeoBundle 'Quramy/tsuquyomi'
 
   augroup vimx
-    autocmd FileType typescript nmap <silent> <buffer> <C-@> :TsuquyomiRenameSymbol<CR>
+    autocmd FileType typescript nmap <silent> <buffer> <C-@> <Plug>(TsuquyomiRenameSymbol)
   augroup END
   " }}}
 endif
