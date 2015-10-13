@@ -603,7 +603,7 @@ if g:vimx#env.exists('typescript') && (v:version >= 704)
   " `<c-t>` Move the cursor to the location where the last `<c-]>` was typed
   " `<c-^>` Show references
   " `:TsuquyomiRenameSymbol`
-  NeoBundleLazy 'Quramy/tsuquyomi', { 'autoload': { 'filetypes': [ 'typescript' ] } }
+  NeoBundleLazy 'Quramy/tsuquyomi'
 
   augroup vimx
     autocmd FileType typescript nmap <silent> <buffer> <C-@> :TsuquyomiRenameSymbol<CR>
