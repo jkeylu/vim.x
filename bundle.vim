@@ -515,10 +515,6 @@ endif
 NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': [ 'html', 'css' ] } }
 " }}}
 
-" {{{ vim-markdown
-NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': [ 'markdown' ] } }
-" }}}
-
 if g:vimx#env.exists('javascript')
   " {{{ vim-css3-syntax
   NeoBundle 'hail2u/vim-css3-syntax', { 'autoload': { 'filetype': [ 'css', 'less', 'stylus' ] } }
@@ -661,6 +657,8 @@ let delimitMate_expand_space = 1
 " }}}
 
 call neobundle#end()
+
+filetype plugin indent on
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.

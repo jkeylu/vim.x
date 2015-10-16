@@ -53,8 +53,6 @@ set incsearch
 set ignorecase smartcase
 
 "  Indent
-filetype plugin indent on
-
 set autoindent
 set smartindent
 set copyindent
