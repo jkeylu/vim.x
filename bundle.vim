@@ -296,20 +296,6 @@ else
         \ }
 
   nmap <silent> <leader>nt :VimFiler -explorer -parent -status -auto-cd -auto-expand -find -force-quit<CR>
-
-  augroup vimx
-    autocmd Filetype vimfiler call s:vimfilerSettings()
-  augroup END
-  function! s:vimfilerSettings()
-    nmap <buffer> q <Plug>(vimfiler_close)
-
-    " fixed in vimfiler
-    " https://github.com/ntpeters/vim-better-whitespace/issues/21
-    if exists('g:loaded_better_whitespace_plugin')
-      DisableWhitespace
-      EnableWhitespace
-    endif
-  endfunction
   " }}}
 endif
 
