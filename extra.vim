@@ -8,6 +8,8 @@ nnoremap <Tab> <Esc>
 vnoremap <Tab> <Esc>
 onoremap <Tab> <Esc>
 
+nnoremap <leader>q :q<CR>
+
 " save read-only file
 if executable('sudo')
   cmap w!! %!sudo tee > /dev/null %
