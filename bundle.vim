@@ -325,6 +325,7 @@ nmap <silent> <S-u> <Plug>(ac-smooth-scroll-c-b)
 NeoBundle 'ntpeters/vim-better-whitespace'
 
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'vimfiler']
+let g:current_line_whitespace_disabled_soft = 1
 " }}}
 
 if v:version > 702
@@ -640,6 +641,10 @@ NeoBundle 'Raimondi/delimitMate'
 
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
+" }}}
+
+" {{{ Game
+NeoBundle 'vim-scripts/TeTrIs.vim'
 " }}}
 
 call neobundle#end()
