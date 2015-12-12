@@ -138,10 +138,10 @@ if g:vimx#env.exists('no-unite')
   " {{{ ctrlp.vim
   " Active fork of 'kien/ctrlp.vim'
   " Usage:
-  " `<c-p>`
-  " `<c-r>` switch to regexp mode
-  " `<c-d>` toggled on/off searching by filename
-  " `<c-z>` mark/unmark multiple files and `<c-o>` to open then
+  " `<C-p>`
+  " `<C-r>` switch to regexp mode
+  " `<C-d>` toggled on/off searching by filename
+  " `<C-z>` mark/unmark multiple files and `<C-o>` to open then
   NeoBundle 'ctrlpvim/ctrlp.vim'
 
   let g:ctrlp_regexp = 1
@@ -300,7 +300,11 @@ else
 endif
 
 " {{{ vim-multiple-cursors
-" Usage: `<c-n>`
+" Usage:
+" `<C-n>` next
+" `<C-p>` prev
+" `<C-x>` skip
+" `<Tab>` quit
 NeoBundle 'terryma/vim-multiple-cursors'
 
 let g:multi_cursor_quit_key = '<Tab>'
@@ -308,8 +312,8 @@ let g:multi_cursor_quit_key = '<Tab>'
 
 " {{{ accelerated-smooth-scroll
 " Usage:
-" `<c-d>` scroll down
-" `<c-u>` scroll up
+" `<C-d>` scroll down
+" `<C-u>` scroll up
 NeoBundle 'yonchu/accelerated-smooth-scroll'
 
 let g:ac_smooth_scroll_no_default_key_mappings = 1
@@ -390,7 +394,7 @@ if executable('ctags')
   let g:tagbar_autoclose = 1
   let g:tagbar_autofocus = 1
   let g:tagbar_show_linenumbers = 2
-  nnoremap <leader>tl :TagbarToggle<cr>
+  nnoremap <leader>tl :TagbarToggle<CR>
   " }}}
 endif
 
@@ -498,7 +502,7 @@ endif
 " }}}
 
 " {{{ emmet-vim
-" Usage: `<c-y>,`
+" Usage: `<C-y>,`
 NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': [ 'html', 'css' ] } }
 " }}}
 
@@ -583,7 +587,7 @@ if g:vimx#env.exists('typescript') && (v:version >= 704)
   " {{{ tsuquyomi
   " Usage:
   " `<C-]>` Nav to definition
-  " `<C-t>` Move the cursor to the location where the last `<c-]>` was typed
+  " `<C-t>` Move the cursor to the location where the last `<C-]>` was typed
   " `<C-^>` Show references
   " `<C-@>` Rename symbols
   NeoBundle 'Quramy/tsuquyomi'
