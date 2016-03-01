@@ -1,7 +1,9 @@
 *.swp
+*~
 .netrwhist
 
 before.vim
 after.vim
+vimrc_mini.vim
 
 bundle/

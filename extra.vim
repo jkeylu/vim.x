@@ -2,6 +2,10 @@
 " author: jKey Lu <jkeylu@gmail.com>
 "
 
+" when pasting copy pasted text back to
+" buffer instaed replacing with override
+xnoremap p pgvy
+
 " [Avoid the escape key](http://vim.wikia.com/wiki/Avoid_the_escape_key)
 imap jj <Esc>`^
 nnoremap <Tab> <Esc>

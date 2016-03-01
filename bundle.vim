@@ -329,7 +329,6 @@ nmap <silent> <S-u> <Plug>(ac-smooth-scroll-c-b)
 NeoBundle 'ntpeters/vim-better-whitespace'
 
 let g:better_whitespace_filetypes_blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'vimfiler']
-let g:current_line_whitespace_disabled_soft = 1
 " }}}
 
 if v:version > 702

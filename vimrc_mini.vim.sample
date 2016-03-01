@@ -1,0 +1,54 @@
+"set nocompatible
+"set runtimepath+=~/.vim/bundle/vimproc.vim
+"set runtimepath+=~/.vim/bundle/unite.vim
+
+"" Use ag in unite grep source.
+"let g:unite_source_grep_command = 'ag'
+"let g:unite_source_grep_default_opts =
+"\ '-i --vimgrep --hidden --ignore ' .
+"\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+"let g:unite_source_grep_recursive_opt = ''
+
+"nmap <silent> <S-f> :Unite -no-quit grep<CR>
+
+
+"set runtimepath+=~/.vim/bundle/vim-better-whitespace
+
+
+" """"""""""""""""""""""""
+" neobundle
+" """"""""""""""""""""""""
+
+" Note: Skip initialization for vim-tiny or vim-small.
+ if 0 | endif
+
+ if has('vim_starting')
+   if &compatible
+     set nocompatible               " Be iMproved
+   endif
+
+   " Required:
+   set runtimepath+=~/.vim/bundle/neobundle.vim/
+ endif
+
+ " Required:
+ call neobundle#begin(expand('~/.vim/bundle/'))
+
+ " Let NeoBundle manage NeoBundle
+ " Required:
+ NeoBundleFetch 'Shougo/neobundle.vim'
+
+ " My Bundles here:
+ " Refer to |:NeoBundle-examples|.
+ " Note: You don't set neobundle setting in .gvimrc!
+
+NeoBundle 'ntpeters/vim-better-whitespace'
+
+ call neobundle#end()
+
+ " Required:
+ filetype plugin indent on
+
+ " If there are uninstalled bundles found on startup,
+ " this will conveniently prompt you to install them.
+ NeoBundleCheck
