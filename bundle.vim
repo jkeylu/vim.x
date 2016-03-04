@@ -71,8 +71,21 @@ if v:version >= 703 && has('python')
   " {{{ YouCompleteMe
   " cd ~/.vim/bundle/YouCompleteMe
   " git submodule update --init --recursive
+  "
+  " // "C-family"   --clang-completer
+  " // "C# support" --omnisharp-completer
+  " // "Go"         --gocode-completer
+  " // "JavaScript" --tern-complete
+  " // "Rust"       --racer-completer
+  "
   " ./install.py --clang-completer --system-libclang --gocode-completer --tern-completer
   NeoBundle 'Valloric/YouCompleteMe'
+
+  nmap <silent> <C-]> :YcmCompleter GoTo<CR>
+
+  augroup vimx
+    autocmd FileType javascript nmap <silent> <buffer> <C-^> :YcmCompleter GoToReferences<CR>
+  augroup END
   " }}}
 else
   " {{{ supertab
