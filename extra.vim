@@ -12,7 +12,10 @@ nnoremap <Tab> <Esc>
 vnoremap <Tab> <Esc>
 onoremap <Tab> <Esc>
 
-nnoremap <leader>q :q<CR>
+nnoremap <silent> <leader>q :q<CR>
+
+" toggle wrap or nowrap
+nmap <silent> <leader>w @=((&wrap == 1) ? ':set nowrap' : ':set wrap')<CR><CR>
 
 " save read-only file
 if executable('sudo')
@@ -20,7 +23,7 @@ if executable('sudo')
 endif
 
 " toggle fold
-nnoremap <silent> <space> @=((foldclosed(line('.'))<0) ? 'zc' : 'zo')<cr>
+nnoremap <silent> <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
 inoremap <expr> <C-j> pumvisible() ? '<C-n>' : '<C-x><C-o>'
 inoremap <expr> <C-k> pumvisible() ? '<C-p>' : '<C-k>'
