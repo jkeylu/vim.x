@@ -312,6 +312,19 @@ else
   " }}}
 endif
 
+" {{{ fzf
+if executable('fzf')
+  if isdirectory('/usr/local/opt/fzf')
+    set rtp+=/usr/local/opt/fzf
+  else
+    NeoBundle 'junegunn/fzf'
+  endif
+
+  " use fzf instead of unite
+  nnoremap <silent> <C-f> :FZF<CR>
+endif
+" }}}
+
 " {{{ vim-multiple-cursors
 " Usage:
 " `<C-n>` next
