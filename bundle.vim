@@ -10,6 +10,9 @@ endif
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
 
+" To increase the Neobundle timeout to 1500 seconds
+let g:neobundle#install_process_timeout = 1500
+
 " {{{ neobundle.vim
 " let NeoBundle manage NeoBundle
 " Usage:
@@ -79,7 +82,15 @@ if v:version >= 703 && has('python')
   " // "Rust"       --racer-completer
   "
   " ./install.py --clang-completer --system-libclang --gocode-completer --tern-completer
-  NeoBundle 'Valloric/YouCompleteMe'
+  NeoBundle 'Valloric/YouCompleteMe',
+        \ {
+        \   'build': {
+        \     'mac': './install.py --clang-completer --system-libclang --gocode-completer --tern-completer',
+        \     'unix': './install.py --clang-completer --system-libclang --gocode-completer --tern-completer',
+        \     'windows': 'install.py --clang-completer --system-libclang --gocode-completer --tern-completer',
+        \     'cygwin': './install.py --clang-completer --system-libclang --gocode-completer --tern-completer'
+        \   }
+        \ }
 
   nmap <silent> <C-]> :YcmCompleter GoTo<CR>
 
