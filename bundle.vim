@@ -92,10 +92,9 @@ if v:version >= 703 && has('python')
         \   }
         \ }
 
-  nmap <silent> <C-]> :YcmCompleter GoTo<CR>
-
   augroup vimx
     autocmd FileType javascript nmap <silent> <buffer> <C-^> :YcmCompleter GoToReferences<CR>
+    autocmd FileType javascript,typescript,go,c,cpp nmap <silent> <buffer> <C-]> :YcmCompleter GoTo<CR>
   augroup END
   " }}}
 else
