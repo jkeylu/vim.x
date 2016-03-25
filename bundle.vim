@@ -584,6 +584,8 @@ if g:vimx#env.exists('go')
 
   function! s:goSettings()
     nmap <silent> <buffer> <C-]> :GoDef<CR>
+    nmap <silent> <buffer> <C-^> :GoReferrers<CR>
+    nmap <silent> <buffer> <C-@> :GoRename<CR>
   endfunction
   " }}}
 endif

@@ -68,6 +68,7 @@ augroup vimx
   autocmd FileType markdown set shiftwidth=4 softtabstop=4
   autocmd FileType python set shiftwidth=4 softtabstop=4
   autocmd FileType typescript set shiftwidth=4 softtabstop=4
+  autocmd FileType go set noexpandtab shiftwidth=4 softtabstop=4
 augroup END
 
 " auto set file type
