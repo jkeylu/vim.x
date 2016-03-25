@@ -75,27 +75,27 @@ if v:version >= 703 && has('python')
   " cd ~/.vim/bundle/YouCompleteMe
   " git submodule update --init --recursive
   "
-  " // "C-family"   --clang-completer
+  " // "C-family"   --clang-completer --system-libclang
   " // "C# support" --omnisharp-completer
   " // "Go"         --gocode-completer
   " // "JavaScript" --tern-complete
   " // "Rust"       --racer-completer
   "
-  " ./install.py --clang-completer --system-libclang --gocode-completer --tern-completer
+  " ./install.py
   NeoBundle 'Valloric/YouCompleteMe',
         \ {
         \   'build': {
-        \     'mac': './install.py --clang-completer --system-libclang --gocode-completer --tern-completer',
-        \     'unix': './install.py --clang-completer --system-libclang --gocode-completer --tern-completer',
-        \     'windows': 'install.py --clang-completer --system-libclang --gocode-completer --tern-completer',
-        \     'cygwin': './install.py --clang-completer --system-libclang --gocode-completer --tern-completer'
+        \     'mac': './install.py',
+        \     'unix': './install.py',
+        \     'windows': 'install.py',
+        \     'cygwin': './install.py'
         \   }
         \ }
 
-  augroup vimx
-    autocmd FileType javascript nmap <silent> <buffer> <C-^> :YcmCompleter GoToReferences<CR>
-    autocmd FileType javascript,typescript,go,c,cpp nmap <silent> <buffer> <C-]> :YcmCompleter GoTo<CR>
-  augroup END
+  "augroup vimx
+  "  autocmd FileType javascript nmap <silent> <buffer> <C-^> :YcmCompleter GoToReferences<CR>
+  "  autocmd FileType javascript,typescript,go,c,cpp nmap <silent> <buffer> <C-]> :YcmCompleter GoTo<CR>
+  "augroup END
   " }}}
 else
   " {{{ supertab
@@ -150,177 +150,118 @@ endif
 NeoBundle 'scrooloose/nerdcommenter'
 " }}}
 
-if g:vimx#env.exists('no-unite')
-  " {{{ bufexplorer
-  " Usage: `<leader><leader>`
-  NeoBundle 'jlanzarotta/bufexplorer'
+" {{{ unite.vim
+" Usage:
+" `C-l` clear cache
+NeoBundle 'Shougo/unite.vim'
 
-  nmap <leader><leader> <leader>be
-  " }}}
+let g:unite_source_grep_max_candidates = 200
 
-  " {{{ ctrlp.vim
-  " Active fork of 'kien/ctrlp.vim'
-  " Usage:
-  " `<C-p>`
-  " `<C-r>` switch to regexp mode
-  " `<C-d>` toggled on/off searching by filename
-  " `<C-z>` mark/unmark multiple files and `<C-o>` to open then
-  NeoBundle 'ctrlpvim/ctrlp.vim'
+if executable('ag')
+  let g:unite_source_rec_async_command =
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
 
-  let g:ctrlp_regexp = 1
-  let g:ctrlp_custom_ignore =
-        \ {
-        \   'dir': '\v[\/]\.(git|hg|svn)$',
-        \   'file': '\v\.(exe|so|dll)$'
-        \ }
-  let g:ctrlp_extensions = ['funky']
-  " }}}
+  " Use ag in unite grep source.
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+        \ '-i --vimgrep --literal --hidden ' .
+        \ '--ignore ''.hg'' ' .
+        \ '--ignore ''.svn'' ' .
+        \ '--ignore ''.git'' ' .
+        \ '--ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+endif
 
-  " {{{ctrlp-funky
-  " Navigate and jump to function defs
-  " Usage:
-  " `<leader>fu`
-  " `<leader>fU`
-  NeoBundle 'tacahiroy/ctrlp-funky'
+" just like bufexplorer
+nmap <silent> <leader><leader> :<C-u>Unite buffer bookmark<CR>
 
-  nnoremap <leader>fu :CtrlPFunky<CR>
-  " narrow the list down with a word under cursor
-  nnoremap <leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<CR>
-  " }}}
+" just like ctrlp.vim
+nnoremap <silent> <C-f> :<C-u>UniteWithProjectDir -start-insert file_rec/async<CR>
 
-  " {{{ nerdtree
-  " Usage:
-  " `<leader>nt`
-  " `<leader>nf`
-  " `<leader>nc`
-  " `<leader>np`
-  NeoBundle 'scrooloose/nerdtree', { 'depends': 'dbakker/vim-projectroot' }
+" just like ctrlf.vim
+nmap <silent> <S-f> :Unite -no-quit grep<CR>
 
-  let NERDTreeChDirMode = 2
-  let NERDTreeWinSize = 25
-  let NERDTreeQuitOnOpen = 1
-  let NERDTreeShowLineNumbers = 1
-  let NERDTreeDirArrows = 0
+augroup vimx
+  autocmd Filetype unite call s:uniteSettings()
+augroup END
 
-  nmap <leader>nt :ProjectRootExe NERDTree<CR>
-  nmap <leader>nf :NERDTreeFocus<CR>
-  nmap <leader>nc :NERDTreeClose<CR>
-  nmap <leader>np :let NERDTreeQuitOnOpen = !NERDTreeQuitOnOpen<CR>
-  " }}}
-else
-  " {{{ unite.vim
-  " Usage:
-  " `C-l` clear cache
-  NeoBundle 'Shougo/unite.vim'
+function! s:uniteSettings()
+  imap <buffer> jj <Plug>(unite_insert_leave)
+  imap <buffer> kk <Plug>(unite_insert_leave)
 
-  let g:unite_source_grep_max_candidates = 200
+  imap <buffer> <Esc> <Plug>(unite_exit)
+  nmap <buffer> <Esc> <Plug>(unite_exit)
 
-  if executable('ag')
-    let g:unite_source_rec_async_command =
-          \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+  imap <buffer> <Tab> <Plug>(unite_select_next_line)
+  imap <buffer> ' <Plug>(unite_quick_match_default_action)
+  nmap <buffer> ' <Plug>(unite_quick_match_default_action)
 
-    " Use ag in unite grep source.
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts =
-          \ '-i --vimgrep --literal --hidden ' .
-          \ '--ignore ''.hg'' ' .
-          \ '--ignore ''.svn'' ' .
-          \ '--ignore ''.git'' ' .
-          \ '--ignore ''.bzr'''
-    let g:unite_source_grep_recursive_opt = ''
-  endif
+  imap <buffer> <C-j> <Plug>(unite_select_next_line)
+  imap <buffer> <C-k> <Plug>(unite_select_previous_line)
 
-  " just like bufexplorer
-  nmap <silent> <leader><leader> :<C-u>Unite buffer bookmark<CR>
+  nmap <buffer> / <Plug>(unite_append_end)
+endfunction
 
-  " just like ctrlp.vim
-  nnoremap <silent> <C-f> :<C-u>UniteWithProjectDir -start-insert file_rec/async<CR>
+if neobundle#tap('unite.vim')
+  function! neobundle#hooks.on_source(bundle)
+    call unite#custom#profile('default', 'context',
+          \ {
+          \   'start_insert': 0,
+          \   'winheight': 10,
+          \   'prompt': '> ',
+          \   'direction': 'botright'
+          \ })
 
-  " just like ctrlf.vim
-  nmap <silent> <S-f> :Unite -no-quit grep<CR>
+    call unite#custom#source('file_rec/async', 'ignore_pattern',
+          \ join([
+          \   '\.git/',
+          \   'node_modules/',
+          \   'bower_components/'
+          \ ], '\|'))
 
-  augroup vimx
-    autocmd Filetype unite call s:uniteSettings()
-  augroup END
+    call unite#custom#source('file_rec/async', 'matchers',
+          \ [
+          \   'matcher_context',
+          \   'matcher_hide_current_file'
+          \ ])
 
-  function! s:uniteSettings()
-    imap <buffer> jj <Plug>(unite_insert_leave)
-    imap <buffer> kk <Plug>(unite_insert_leave)
-
-    imap <buffer> <Esc> <Plug>(unite_exit)
-    nmap <buffer> <Esc> <Plug>(unite_exit)
-
-    imap <buffer> <Tab> <Plug>(unite_select_next_line)
-    imap <buffer> ' <Plug>(unite_quick_match_default_action)
-    nmap <buffer> ' <Plug>(unite_quick_match_default_action)
-
-    imap <buffer> <C-j> <Plug>(unite_select_next_line)
-    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
-
-    nmap <buffer> / <Plug>(unite_append_end)
+    call unite#custom#source('file_rec/async', 'sorters',
+          \ [
+          \   'sorter_length'
+          \ ])
   endfunction
 
-  if neobundle#tap('unite.vim')
-    function! neobundle#hooks.on_source(bundle)
-      call unite#custom#profile('default', 'context',
-            \ {
-            \   'start_insert': 0,
-            \   'winheight': 10,
-            \   'prompt': '> ',
-            \   'direction': 'botright'
-            \ })
-
-      call unite#custom#source('file_rec/async', 'ignore_pattern',
-            \ join([
-            \   '\.git/',
-            \   'node_modules/',
-            \   'bower_components/'
-            \ ], '\|'))
-
-      call unite#custom#source('file_rec/async', 'matchers',
-            \ [
-            \   'matcher_context',
-            \   'matcher_hide_current_file'
-            \ ])
-
-      call unite#custom#source('file_rec/async', 'sorters',
-            \ [
-            \   'sorter_length'
-            \ ])
-    endfunction
-
-    call neobundle#untap()
-  endif
-  " }}}
-
-  " {{{ vimfiler.vim
-  " Usage:
-  " `<leader>nt`
-  " in vimfiler `&` switch to project directory
-  "NeoBundle 'Shougo/vimfiler.vim'
-  NeoBundleLazy 'Shougo/vimfiler.vim',
-        \ {
-        \   'depends': 'Shougo/unite.vim',
-        \   'autoload': {
-        \     'commands': [
-        \       {
-        \         'name': 'VimFiler',
-        \         'complete': 'customlist,vimfiler#complete'
-        \       },
-        \       'VimFilerExplorer',
-        \       'Edit',
-        \       'Read',
-        \       'Source',
-        \       'Write'
-        \     ],
-        \     'mappings': '<Plug>',
-        \     'explorer': 1
-        \   }
-        \ }
-
-  nmap <silent> <leader>nt :VimFiler -explorer -parent -status -auto-cd -auto-expand -find -force-quit<CR>
-  " }}}
+  call neobundle#untap()
 endif
+" }}}
+
+" {{{ vimfiler.vim
+" Usage:
+" `<leader>nt`
+" in vimfiler `&` switch to project directory
+"NeoBundle 'Shougo/vimfiler.vim'
+NeoBundleLazy 'Shougo/vimfiler.vim',
+      \ {
+      \   'depends': 'Shougo/unite.vim',
+      \   'autoload': {
+      \     'commands': [
+      \       {
+      \         'name': 'VimFiler',
+      \         'complete': 'customlist,vimfiler#complete'
+      \       },
+      \       'VimFilerExplorer',
+      \       'Edit',
+      \       'Read',
+      \       'Source',
+      \       'Write'
+      \     ],
+      \     'mappings': '<Plug>',
+      \     'explorer': 1
+      \   }
+      \ }
+
+nmap <silent> <leader>nt :VimFiler -explorer -parent -status -auto-cd -auto-expand -find -force-quit<CR>
+" }}}
 
 " {{{ fzf
 if executable('fzf')
@@ -579,6 +520,26 @@ if g:vimx#env.exists('javascript')
   let g:html_indent_script1 = 'inc'
   let g:html_indent_style1 = 'inc'
   " }}}
+
+  " {{{ tern_for_vim
+  " Usage:
+  " `TernDef` Jump to the definition of the thing under the cursor.
+  " `TernDoc` Look up the documentation of something.
+  " `TernType` Find the type of the thing under the cursor.
+  " `TernRefs` Show all references to the variable or property under the cursor.
+  " `TernRename` Rename the variable under the cursor.
+  NeoBundle 'marijnh/tern_for_vim'
+
+  augroup vimx
+    autocmd FileType javascript call s:ternSettings()
+  augroup END
+
+  function! s:ternSettings()
+    nmap <silent> <buffer> <C-]> :TernDef<CR>
+    nmap <silent> <buffer> <C-^> :TernRefs<CR>
+    nmap <silent> <buffer> <C-@> :TernRename<CR>
+  endfunction
+  " }}}
 endif
 
 if g:vimx#env.exists('python')
@@ -610,6 +571,20 @@ if g:vimx#env.exists('typescript') && (v:version >= 704)
   augroup vimx
     autocmd FileType typescript nmap <silent> <buffer> <C-@> <Plug>(TsuquyomiRenameSymbol)
   augroup END
+  " }}}
+endif
+
+if g:vimx#env.exists('go')
+  " {{{ vim-go
+  NeoBundle 'fatih/vim-go'
+
+  augroup vimx
+    autocmd FileType go call s:goSettings()
+  augroup END
+
+  function! s:goSettings()
+    nmap <silent> <buffer> <C-]> :GoDef<CR>
+  endfunction
   " }}}
 endif
 
