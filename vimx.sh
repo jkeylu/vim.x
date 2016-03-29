@@ -7,10 +7,14 @@ chvimrc() {
         rm ~/.vim/vimrc
 
         if [[ $1 = "x" ]]; then
-            cd ~/.vim/ && ln -s vimrc.vim vimrc
+            pushd ~/.vim/ > /dev/null
+            ln -s vimrc.vim vimrc
+            popd > /dev/null
 
         elif [[ $1 = "m" ]]; then
-            cd ~/.vim/ && ln -s vimrc_mini.vim vimrc
+            pushd ~/.vim/ > /dev/null
+            ln -s vimrc_mini.vim vimrc
+            popd > /dev/null
         fi
 
         echo ".vimrc has been switched to: "
