@@ -440,7 +440,8 @@ endif
 " `;w` word motion
 " `;b`
 " `;e`
-" `;f` looking for
+" `;f` looking for right
+" `;F` looking for right
 NeoBundle 'easymotion/vim-easymotion'
 
 let g:EasyMotion_smartcase = 1
