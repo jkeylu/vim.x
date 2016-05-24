@@ -264,6 +264,13 @@ nmap <silent> <leader>nt :VimFiler -explorer -parent -status -auto-cd -auto-expa
 " }}}
 
 " {{{ fzf
+" in fzf
+" {
+"   'ctrl-m': 'e',
+"   'ctrl-t': 'tab split',
+"   'ctrl-x': 'split',
+"   'ctrl-v': 'vsplit'
+" }
 if executable('fzf')
   if isdirectory('/usr/local/opt/fzf')
     set rtp+=/usr/local/opt/fzf
