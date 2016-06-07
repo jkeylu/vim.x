@@ -619,7 +619,12 @@ endif
 " `<leader>tt` Triggers |table-mode-commands-tableize| on the visually selected content.
 NeoBundle 'dhruvasagar/vim-table-mode'
 
-let g:table_mode_header_fillchar = '='
+" Markdown-compatible
+let g:table_mode_corner = '|'
+
+" ReST-compatible
+" let g:table_mode_corner = '+'
+" let g:table_mode_header_fillchar = '='
 " }}}
 
 " {{{ vim-choosewin
