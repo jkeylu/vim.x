@@ -26,7 +26,11 @@ endif
 
 " NeoBundle Settings
 "
-source ~/.vim/bundle.vim
+if v:version >= 704
+  source ~/.vim/bundle_dein.vim
+else
+  source ~/.vim/bundle_neobundle.vim
+endif
 
 
 " Basic Settings
