@@ -68,7 +68,7 @@ if has('gui_running')
 endif
 " }}}
 
-if v:version >= 703 && has('python')
+if v:version >= 703 && (has('python') || has('python3'))
       \ && !(g:vimx#platform.isMswin() || g:vimx#platform.isCygwin())
       \ || g:vimx#env.exists('ycm')
   " {{{ YouCompleteMe
