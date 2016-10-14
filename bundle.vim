@@ -404,6 +404,19 @@ if executable('git')
   NeoBundle 'tpope/vim-fugitive'
   " }}}
 
+  " {{{ vim-merginal
+  " Usage:
+  " `:Merginal`
+  " `C/cc` Checkout the branch under the cursor.
+  " `A/aa` Create a new branch from the currently checked out branch.
+  "        You'll be prompted to enter a name for the new branch
+  " `D/dd` Delete the branch under the cursor.
+  " `M/mm` Merge the branch under the cursor into the currently checked out
+  "        branch. If there are merge conflicts, the merge conflicts buffer will open
+  "        in place of the branch list buffer.
+  NeoBundle 'idanarye/vim-merginal'
+  " }}}
+
   " {{{ gitv
   " Usage:
   " `:Gitv`
