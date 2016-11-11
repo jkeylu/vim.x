@@ -61,14 +61,12 @@ set cindent
 " tab style
 set expandtab
 set tabstop=4
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 
 augroup vimx
-  autocmd FileType markdown set shiftwidth=4 softtabstop=4
-  autocmd FileType python set shiftwidth=4 softtabstop=4
-  autocmd FileType typescript set shiftwidth=4 softtabstop=4
-  autocmd FileType go set noexpandtab shiftwidth=4 softtabstop=4
+  autocmd FileType javascript set shiftwidth=2 softtabstop=2
+  autocmd FileType vim set shiftwidth=2 softtabstop=2
 augroup END
 
 " auto set file type
