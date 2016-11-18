@@ -67,6 +67,7 @@ set softtabstop=4
 augroup vimx
   autocmd FileType javascript set shiftwidth=2 softtabstop=2
   autocmd FileType vim set shiftwidth=2 softtabstop=2
+  autocmd FileType sh set shiftwidth=2 softtabstop=2
 augroup END
 
 " auto set file type
