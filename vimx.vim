@@ -92,13 +92,13 @@ function! g:vimx#env.remove(...) dict
 endfunction
 
 function! g:vimx#env.list() dict
-  echo s:config.env.names
+  return s:config.env.names
 endfunction
 
 command! -nargs=* -complete=filetype VimxEnvAdd call g:vimx#env.add(<f-args>) | call s:saveConfig()
 command! -nargs=* -complete=filetype VimxEnvRemove call g:vimx#env.remove(<f-args>) | call s:saveConfig()
 command! -nargs=1 -complete=filetype VimxEnvExists echo g:vimx#env.exists(<f-args>) ? 'Exists' : 'Not Exists'
-command! -nargs=0 VimxEnvList call g:vimx#env.list()
+command! -nargs=0 VimxEnvList echo g:vimx#env.list()
 " }}}
 
 " {{{

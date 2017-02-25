@@ -24,13 +24,9 @@ if filereadable(expand('~/.vim/before.vim'))
 endif
 
 
-" NeoBundle Settings
+" Bundle Settings
 "
-if v:version >= 704
-  source ~/.vim/bundle_dein.vim
-else
-  source ~/.vim/bundle_neobundle.vim
-endif
+source ~/.vim/bundle.vim
 
 
 " Basic Settings
