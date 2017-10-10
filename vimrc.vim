@@ -222,12 +222,12 @@ if dein#load_state('~/.vim/bundle')
   " }}}
 
   " {{{ Default Bundle
-  call dein#add('morhetz/gruvbox', 
+  call dein#add('morhetz/gruvbox',
         \ {
         \   'hook_source': 'call ' . s:SID() . 'gruvbox_on_source()',
         \})
 
-  call dein#add('jkeylu/vimcdoc')
+  call dein#add('yianwillis/vimcdoc')
 
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
 
@@ -261,7 +261,22 @@ if dein#load_state('~/.vim/bundle')
         \ })
 
   " `<leader>nt`
-  " in vimfiler `&` switch to project directory
+  "
+  " in vimfiler:
+  " `g?` help
+  " `c` copy file
+  " `m` move file
+  " `d` delete file
+  " `r` rename file
+  " `K` make directory
+  " `N` new file
+  " `~` switch to home directory
+  " `\` switch to root directory
+  " `&` switch to project directory
+  " `<BS>` switch to parent directory
+  " `.` toggle visible ignore files
+  " `v` preview file
+  " `gs` toggle safe mode
   call dein#add('Shougo/vimfiler.vim',
         \ {
         \   'hook_source': 'call ' . s:SID() . 'vimfiler_vim_on_source()'
@@ -638,6 +653,7 @@ endfunction
 
 " {{{ vimfiler.vim
 function s:vimfiler_vim_on_source()
+  let g:vimfiler_as_default_explorer = 1
   nmap <silent> <leader>nt :VimFiler -explorer -parent -status -auto-cd -auto-expand -find -force-quit<CR>
 endfunction
 " }}}
@@ -878,6 +894,7 @@ set nobackup
 set showcmd
 set backspace=indent,eol,start
 set foldmethod=marker
+set wildmenu
 
 " Highlight cursor line
 set cursorline
