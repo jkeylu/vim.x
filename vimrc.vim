@@ -476,7 +476,12 @@ if dein#load_state('~/.vim/bundle')
     " `TernType` Find the type of the thing under the cursor.
     " `TernRefs` Show all references to the variable or property under the cursor.
     " `TernRename` Rename the variable under the cursor.
-    call dein#add('ternjs/tern_for_vim', { 'build': 'npm install' })
+    call dein#add('ternjs/tern_for_vim',
+          \ {
+          \   'build': 'npm install',
+          \   'on_ft': [ 'javascript' ],
+          \   'hook_source': 'call ' . s:SID() . 'tern_for_vim_on_source()'
+          \ })
 
   endif
   " }}} JavaScript Bundle
@@ -785,9 +790,9 @@ endfunction
 
 " {{{ vim-node-dict
 function s:vim_node_dict_on_source()
-    augroup vimx
-      autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/repos/github.com/guileen/vim-node-dict/dict/node.dict
-    augroup END
+  augroup vimx
+    autocmd FileType javascript set dictionary+=$HOME/.vim/bundle/repos/github.com/guileen/vim-node-dict/dict/node.dict
+  augroup END
 endfunction
 " }}}
 
@@ -801,9 +806,9 @@ endfunction
 
 " {{{ tern_for_vim
 function s:tern_for_vim_on_source()
-    augroup vimx
-      autocmd FileType javascript call s:tern_settings()
-    augroup END
+  augroup vimx
+    autocmd FileType javascript call s:tern_settings()
+  augroup END
 endfunction
 
 function! s:tern_settings()
@@ -819,9 +824,9 @@ endfunction
 
 " {{{ tsuquyomi
 function s:tsuquyomi_on_source()
-    augroup vimx
-      autocmd FileType typescript nmap <silent> <buffer> <C-@> <Plug>(TsuquyomiRenameSymbol)
-    augroup END
+  augroup vimx
+    autocmd FileType typescript nmap <silent> <buffer> <C-@> <Plug>(TsuquyomiRenameSymbol)
+  augroup END
 endfunction
 " }}}
 
@@ -831,9 +836,9 @@ endfunction
 
 " {{{ vim-go
 function s:vim_go_on_source()
-    augroup vimx
-      autocmd FileType go call s:go_settings()
-    augroup END
+  augroup vimx
+    autocmd FileType go call s:go_settings()
+  augroup END
 endfunction
 
 function! s:go_settings()
@@ -910,7 +915,7 @@ set statusline=\ %f%m%r%h%w\ \[%{&fileformat}\\%{&fileencoding}\]\ %=\ Line:%l/%
 if exists('+colorcolumn')
   set colorcolumn=80
 else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
 " Read first line or last line to exec modeline
