@@ -595,17 +595,19 @@ function s:unite_vim_on_source()
   nmap <silent> <leader><leader> :<C-u>Unite buffer bookmark<CR>
 
   " just like ctrlp.vim
-  nnoremap <silent> <C-f> :<C-u>UniteWithProjectDir -start-insert file_rec/async<CR>
+  if !executable('fzf')
+    nnoremap <silent> <C-f> :<C-u>UniteWithProjectDir -start-insert file_rec/async<CR>
+  endif
 
   " just like ctrlf.vim
   nmap <silent> <S-f> :Unite -no-quit grep<CR>
 
   augroup vimx
-    autocmd Filetype unite call s:uniteSettings()
+    autocmd Filetype unite call s:unite_settings()
   augroup END
 endfunction
 
-function! s:uniteSettings()
+function! s:unite_settings()
   imap <buffer> jj <Plug>(unite_insert_leave)
   imap <buffer> kk <Plug>(unite_insert_leave)
 
@@ -800,11 +802,11 @@ endfunction
 " {{{ tern_for_vim
 function s:tern_for_vim_on_source()
     augroup vimx
-      autocmd FileType javascript call s:ternSettings()
+      autocmd FileType javascript call s:tern_settings()
     augroup END
 endfunction
 
-function! s:ternSettings()
+function! s:tern_settings()
   nmap <silent> <buffer> <C-]> :TernDef<CR>
   nmap <silent> <buffer> <C-^> :TernRefs<CR>
   nmap <silent> <buffer> <C-@> :TernRename<CR>
@@ -830,11 +832,11 @@ endfunction
 " {{{ vim-go
 function s:vim_go_on_source()
     augroup vimx
-      autocmd FileType go call s:goSettings()
+      autocmd FileType go call s:go_settings()
     augroup END
 endfunction
 
-function! s:goSettings()
+function! s:go_settings()
   nmap <silent> <buffer> <C-^> :GoReferrers<CR>
   nmap <silent> <buffer> <C-@> :GoRename<CR>
 endfunction
