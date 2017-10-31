@@ -745,6 +745,8 @@ function s:vim_easymotion_on_source()
   omap / <Plug>(easymotion-tn)
   map n <Plug>(easymotion-next)
   map N <Plug>(easymotion-prev)
+  " https://github.com/easymotion/vim-easymotion/issues/348
+  autocmd VimEnter * :EMCommandLineNoreMap <C-v> <C-r>+
 endfunction
 " }}}
 
