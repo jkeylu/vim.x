@@ -12,11 +12,6 @@ endif
 let mapleader = ','
 
 
-" Load default env
-"
-source ~/.vim/vimx.vim
-
-
 " Before
 "
 if filereadable(expand('~/.vim/before.vim'))
@@ -26,17 +21,17 @@ endif
 
 " Bundle Settings
 "
-source ~/.vim/bundle.vim
+source ~/.vim/core/bundle.vim
 
 
 " Basic Settings
 "
-source ~/.vim/basic.vim
+source ~/.vim/core/basic.vim
 
 
 " Extra Settings
 "
-source ~/.vim/extra.vim
+source ~/.vim/core/extra.vim
 
 
 " After
