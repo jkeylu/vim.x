@@ -1,4 +1,10 @@
 
+" {{{ dein-ui.vim
+if g:vimx_loading_bundle
+  call dein#add('wsdjeg/dein-ui.vim')
+endif
+" }}}
+
 " {{{ gruvbox
 if g:vimx_loading_bundle
   call dein#add('morhetz/gruvbox',
