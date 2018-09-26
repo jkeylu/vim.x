@@ -1,8 +1,7 @@
 
-" {{{ typescript-vim
-" Usage: `:make`
+" {{{ yats.vim
 if g:vimx_loading_bundle
-  call dein#add('leafgarland/typescript-vim', { 'on_ft': [ 'typescript' ] })
+  call dein#add('HerringtonDarkholme/yats.vim', { 'on_ft': 'typescript' })
 endif
 " }}}
 
@@ -15,11 +14,18 @@ endif
 if g:vimx_loading_bundle
   call dein#add('Quramy/tsuquyomi',
         \ {
+        \   'on_ft': 'typescript',
         \   'hook_source': 'execute "doautocmd <nomodeline> User" "dein#source#".g:dein#plugin.name'
         \ })
 else
   autocmd User dein#source#tsuquyomi call s:tsuquyomi_on_source()
   function s:tsuquyomi_on_source()
+    let g:tsuquyomi_completion_detail = 1
+
+    "call deoplete#custom#option('omni_patterns', {
+    "      \   'typescript': '[^. *\t]\.\w*'
+    "      \ })
+
     augroup vimx
       autocmd FileType typescript nmap <silent> <buffer> <C-@> <Plug>(TsuquyomiRenameSymbol)
     augroup END

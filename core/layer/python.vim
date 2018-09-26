@@ -1,7 +1,7 @@
 
 " {{{ vim-python-pep8-indent
 if g:vimx_loading_bundle
-  call dein#add('hynek/vim-python-pep8-indent', { 'on_ft': [ 'python' ] })
+  call dein#add('hynek/vim-python-pep8-indent', { 'on_ft': 'python' })
 endif
 " }}}
 

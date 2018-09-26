@@ -2,7 +2,7 @@
 " {{{ a.vim
 " Usage: `:A`
 if g:vimx_loading_bundle
-  call dein#add('vim-scripts/a.vim', { 'on_ft': [ 'c', 'cpp' ] })
+  call dein#add('vim-scripts/a.vim', { 'on_ft': ['c', 'cpp'] })
 endif
 " }}}
 
