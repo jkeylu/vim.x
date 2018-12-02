@@ -111,7 +111,7 @@ else
   function! s:defx_settings() abort
     function s:close_defx()
       if bufwinnr('defx') > 0
-        execute 'bdelete defx'
+        execute 'bdelete ' . bufnr('defx')
       endif
     endfunction
 
