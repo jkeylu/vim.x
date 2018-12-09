@@ -1,0 +1,7 @@
+*.swp
+*~
+.netrwhist
+
+autoload/
+bundle/
+plugged/
