@@ -1,6 +1,8 @@
 vim.x
 =====
 
+## Move to [https://github.com/jkeylu/dotfiles](https://github.com/jkeylu/dotfiles)
+
 ### Install
 
 1. Setup Vim.x
